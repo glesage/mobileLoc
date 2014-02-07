@@ -16,8 +16,6 @@
 		36E195FF18A5156800190E84 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E195FE18A5156800190E84 /* AppDelegate.m */; };
 		36E1960218A5156800190E84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36E1960018A5156800190E84 /* Main.storyboard */; };
 		36E1960518A5156800190E84 /* mobileloc.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 36E1960318A5156800190E84 /* mobileloc.xcdatamodeld */; };
-		36E1960818A5156800190E84 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E1960718A5156800190E84 /* MainViewController.m */; };
-		36E1960B18A5156800190E84 /* FlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E1960A18A5156800190E84 /* FlipsideViewController.m */; };
 		36E1960D18A5156800190E84 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36E1960C18A5156800190E84 /* Images.xcassets */; };
 		36E1961418A5156800190E84 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E1961318A5156800190E84 /* XCTest.framework */; };
 		36E1961518A5156800190E84 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E195EC18A5156800190E84 /* Foundation.framework */; };
@@ -25,6 +23,11 @@
 		36E1961718A5156800190E84 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E195F218A5156800190E84 /* CoreData.framework */; };
 		36E1961F18A5156900190E84 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36E1961D18A5156900190E84 /* InfoPlist.strings */; };
 		36E1962118A5156900190E84 /* mobilelocTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E1962018A5156900190E84 /* mobilelocTests.m */; };
+		36FBBF5318A5259500462208 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FBBF5218A5259500462208 /* SettingsViewController.m */; };
+		36FBBF5518A525BD00462208 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FBBF5418A525BD00462208 /* MainViewController.m */; };
+		36FBBF5918A5278400462208 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FBBF5818A5278400462208 /* DataManager.m */; };
+		36FBBF5F18A5299300462208 /* PlaceFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FBBF5E18A5299300462208 /* PlaceFetcher.m */; };
+		36FBBF6218A52AB600462208 /* GooglePlaces.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FBBF6118A52AB600462208 /* GooglePlaces.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,15 +55,21 @@
 		36E1960118A5156800190E84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		36E1960418A5156800190E84 /* mobileloc.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = mobileloc.xcdatamodel; sourceTree = "<group>"; };
 		36E1960618A5156800190E84 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		36E1960718A5156800190E84 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		36E1960918A5156800190E84 /* FlipsideViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlipsideViewController.h; sourceTree = "<group>"; };
-		36E1960A18A5156800190E84 /* FlipsideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlipsideViewController.m; sourceTree = "<group>"; };
 		36E1960C18A5156800190E84 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		36E1961218A5156800190E84 /* mobilelocTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mobilelocTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		36E1961318A5156800190E84 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		36E1961C18A5156900190E84 /* mobilelocTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "mobilelocTests-Info.plist"; sourceTree = "<group>"; };
 		36E1961E18A5156900190E84 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		36E1962018A5156900190E84 /* mobilelocTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mobilelocTests.m; sourceTree = "<group>"; };
+		36FBBF5118A5259500462208 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		36FBBF5218A5259500462208 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		36FBBF5418A525BD00462208 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		36FBBF5718A5278400462208 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataManager.h; path = "Data Management/DataManager.h"; sourceTree = "<group>"; };
+		36FBBF5818A5278400462208 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataManager.m; path = "Data Management/DataManager.m"; sourceTree = "<group>"; };
+		36FBBF5D18A5299300462208 /* PlaceFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlaceFetcher.h; path = "Data Management/PlaceFetcher.h"; sourceTree = "<group>"; };
+		36FBBF5E18A5299300462208 /* PlaceFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlaceFetcher.m; path = "Data Management/PlaceFetcher.m"; sourceTree = "<group>"; };
+		36FBBF6018A52AB600462208 /* GooglePlaces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GooglePlaces.h; path = "Data Management/Places Third Parties/GooglePlaces.h"; sourceTree = "<group>"; };
+		36FBBF6118A52AB600462208 /* GooglePlaces.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GooglePlaces.m; path = "Data Management/Places Third Parties/GooglePlaces.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,9 +136,10 @@
 				36E195FE18A5156800190E84 /* AppDelegate.m */,
 				36E1960018A5156800190E84 /* Main.storyboard */,
 				36E1960618A5156800190E84 /* MainViewController.h */,
-				36E1960718A5156800190E84 /* MainViewController.m */,
-				36E1960918A5156800190E84 /* FlipsideViewController.h */,
-				36E1960A18A5156800190E84 /* FlipsideViewController.m */,
+				36FBBF5418A525BD00462208 /* MainViewController.m */,
+				36FBBF5118A5259500462208 /* SettingsViewController.h */,
+				36FBBF5218A5259500462208 /* SettingsViewController.m */,
+				36FBBF5618A526C600462208 /* Data Management */,
 				36E1960C18A5156800190E84 /* Images.xcassets */,
 				36E1960318A5156800190E84 /* mobileloc.xcdatamodeld */,
 				36E195F518A5156800190E84 /* Supporting Files */,
@@ -164,6 +174,27 @@
 				36E1961D18A5156900190E84 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		36FBBF5618A526C600462208 /* Data Management */ = {
+			isa = PBXGroup;
+			children = (
+				36FBBF5718A5278400462208 /* DataManager.h */,
+				36FBBF5818A5278400462208 /* DataManager.m */,
+				36FBBF5D18A5299300462208 /* PlaceFetcher.h */,
+				36FBBF5E18A5299300462208 /* PlaceFetcher.m */,
+				36FBBF6318A52ABA00462208 /* Places Third Parties */,
+			);
+			name = "Data Management";
+			sourceTree = "<group>";
+		};
+		36FBBF6318A52ABA00462208 /* Places Third Parties */ = {
+			isa = PBXGroup;
+			children = (
+				36FBBF6018A52AB600462208 /* GooglePlaces.h */,
+				36FBBF6118A52AB600462208 /* GooglePlaces.m */,
+			);
+			name = "Places Third Parties";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,10 +298,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				36E1960518A5156800190E84 /* mobileloc.xcdatamodeld in Sources */,
+				36FBBF5918A5278400462208 /* DataManager.m in Sources */,
 				36E195FF18A5156800190E84 /* AppDelegate.m in Sources */,
 				36E195FB18A5156800190E84 /* main.m in Sources */,
-				36E1960B18A5156800190E84 /* FlipsideViewController.m in Sources */,
-				36E1960818A5156800190E84 /* MainViewController.m in Sources */,
+				36FBBF5F18A5299300462208 /* PlaceFetcher.m in Sources */,
+				36FBBF5518A525BD00462208 /* MainViewController.m in Sources */,
+				36FBBF6218A52AB600462208 /* GooglePlaces.m in Sources */,
+				36FBBF5318A5259500462208 /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -2,11 +2,12 @@
 //  MainViewController.m
 //  mobileloc
 //
-//  Created by ANDREW KUCHARSKI on 2/7/14.
+//  Created by GEOFFROY LESAGE on 2/7/14.
 //  Copyright (c) 2014 GeoffroyLesage. All rights reserved.
 //
 
 #import "MainViewController.h"
+#import "DataManager.h"
 
 @interface MainViewController ()
 
@@ -17,7 +18,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+	[DataManager sharedManager];
 }
 
 - (void)didReceiveMemoryWarning
@@ -26,16 +27,16 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Flipside View
+#pragma mark - Settings View
 
-- (void)flipsideViewControllerDidFinish:(FlipsideViewController *)controller
+- (void)settingsViewControllerDidFinish:(SettingsViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"showAlternate"]) {
+    if ([[segue identifier] isEqualToString:@"showSettings"]) {
         [[segue destinationViewController] setDelegate:self];
     }
 }
