@@ -7,7 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface GooglePlaces : NSObject
+@protocol GooglePlacesDelegate
+- (void)gpGotPlaces:(NSDictionary*)places;
+- (void)gpFailedToGetPlaces:(NSError*)error;
+
+@end
+
+@interface GooglePlaces : NSObject {
+    AFHTTPSessionManager *manager;
+}
+
+@property (weak, nonatomic) id <GooglePlacesDelegate> delegate;
+
+-(id)initWithLocation:(CLLocation*)location;
+-(void)cancelFetching;
 
 @end

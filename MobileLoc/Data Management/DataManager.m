@@ -10,8 +10,6 @@
 
 @implementation DataManager
 
-@synthesize placeFetcher;
-
 
 static DataManager *sharedDataManager;
 
@@ -29,9 +27,27 @@ static DataManager *sharedDataManager;
 - (id)init {
     self = [super init];
     if (self) {
-        NSLog(@"Inited!!");
+        placeFetcher = [[PlaceFetcher alloc] init];
+        [placeFetcher setDelegate:self];
+
+        [placeFetcher fetchPlacesAround:[[CLLocation alloc] initWithLatitude:41.942 longitude:-87.645]]; // Test home location
     }
     return self;
+}
+
+
+# pragma mark - PlaceFetcherDelegate
+
+-(void)pfGotAllPlaces:(NSDictionary *)places {
+    NSLog(@"Got Google places - %@", places);
+}
+
+-(void)pfFailedToGetPlaces:(NSError *)error {
+    NSLog(@"Failed to get Google places - %@", error.description);
+}
+
+-(void)pfTimedOut {
+    NSLog(@"Time out bro!");
 }
 
 @end

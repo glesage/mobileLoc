@@ -8,6 +8,26 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PlaceFetcher : NSObject
+#import "GooglePlaces.h"
+
+@protocol PlaceFetcherDelegate
+- (void)pfGotAllPlaces:(NSDictionary*)places;
+- (void)pfFailedToGetPlaces:(NSError*)error;
+- (void)pfTimedOut;
+
+@end
+
+@interface PlaceFetcher : NSObject <GooglePlacesDelegate> {
+    GooglePlaces *googlePlaces;
+    BOOL gotGP;
+    
+    NSTimer *timeOutTimer;
+    
+    NSMutableDictionary *allPlaces;
+}
+
+@property (weak, nonatomic) id <PlaceFetcherDelegate> delegate;
+
+-(void)fetchPlacesAround:(CLLocation*)location;
 
 @end
