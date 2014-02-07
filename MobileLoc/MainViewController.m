@@ -7,6 +7,8 @@
 //
 
 #import "MainViewController.h"
+
+#import "LocationManager.h"
 #import "DataManager.h"
 
 @interface MainViewController ()
@@ -18,6 +20,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //Initialize the manager singletons: location polling & data files
+    [LocationManager sharedManager];
 	[DataManager sharedManager];
 }
 

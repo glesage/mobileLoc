@@ -7,6 +7,7 @@
 //
 
 #import "DataManager.h"
+#import "LocationManager.h"
 
 @implementation DataManager
 
@@ -30,7 +31,10 @@ static DataManager *sharedDataManager;
         placeFetcher = [[PlaceFetcher alloc] init];
         [placeFetcher setDelegate:self];
 
-        [placeFetcher fetchPlacesAround:[[CLLocation alloc] initWithLatitude:41.942 longitude:-87.645]]; // Test home location
+        [placeFetcher fetchPlacesAround:[[LocationManager sharedManager] getCurrentLocation]];
+        
+        //Test home location
+        //[placeFetcher fetchPlacesAround:[[CLLocation alloc] initWithLatitude:41.942 longitude:-87.645]];
     }
     return self;
 }

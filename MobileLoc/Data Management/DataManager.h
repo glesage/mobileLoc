@@ -9,11 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "PlaceFetcher.h"
 
-@interface DataManager : NSObject {
+@interface DataManager : NSObject <PlaceFetcherDelegate> {
     PlaceFetcher *placeFetcher;
 }
-
-@property (nonatomic, strong) PlaceFetcher *placeFetcher;
 
 + (DataManager *)sharedManager;
 
