@@ -1,6 +1,6 @@
 //
-//  MobileLocTests.m
-//  MobileLocTests
+//  mobilelocTests.m
+//  mobilelocTests
 //
 //  Created by ANDREW KUCHARSKI on 2/7/14.
 //  Copyright (c) 2014 GeoffroyLesage. All rights reserved.
@@ -8,11 +8,11 @@
 
 #import <XCTest/XCTest.h>
 
-@interface MobileLocTests : XCTestCase
+@interface mobilelocTests : XCTestCase
 
 @end
 
-@implementation MobileLocTests
+@implementation mobilelocTests
 
 - (void)setUp
 {
