@@ -28,6 +28,7 @@
 		36FBBF5918A5278400462208 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FBBF5818A5278400462208 /* DataManager.m */; };
 		36FBBF5F18A5299300462208 /* PlaceFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FBBF5E18A5299300462208 /* PlaceFetcher.m */; };
 		36FBBF6218A52AB600462208 /* GooglePlaces.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FBBF6118A52AB600462208 /* GooglePlaces.m */; };
+		E219F79FF7F94B40AF474AE7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B74C7E999846DA8F71F6C9 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		03B74C7E999846DA8F71F6C9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		36E195E918A5156800190E84 /* mobileloc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mobileloc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36E195EC18A5156800190E84 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		36E195EE18A5156800190E84 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -70,6 +72,7 @@
 		36FBBF5E18A5299300462208 /* PlaceFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlaceFetcher.m; path = "Data Management/PlaceFetcher.m"; sourceTree = "<group>"; };
 		36FBBF6018A52AB600462208 /* GooglePlaces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GooglePlaces.h; path = "Data Management/Places Third Parties/GooglePlaces.h"; sourceTree = "<group>"; };
 		36FBBF6118A52AB600462208 /* GooglePlaces.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GooglePlaces.m; path = "Data Management/Places Third Parties/GooglePlaces.m"; sourceTree = "<group>"; };
+		CB0C1BA8AB9C411D9EDF744A /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +84,7 @@
 				36E195F318A5156800190E84 /* CoreData.framework in Frameworks */,
 				36E195F118A5156800190E84 /* UIKit.framework in Frameworks */,
 				36E195ED18A5156800190E84 /* Foundation.framework in Frameworks */,
+				E219F79FF7F94B40AF474AE7 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +109,7 @@
 				36E1961A18A5156900190E84 /* mobilelocTests */,
 				36E195EB18A5156800190E84 /* Frameworks */,
 				36E195EA18A5156800190E84 /* Products */,
+				CB0C1BA8AB9C411D9EDF744A /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,6 +130,7 @@
 				36E195F018A5156800190E84 /* UIKit.framework */,
 				36E195F218A5156800190E84 /* CoreData.framework */,
 				36E1961318A5156800190E84 /* XCTest.framework */,
+				03B74C7E999846DA8F71F6C9 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -135,10 +141,7 @@
 				36E195FD18A5156800190E84 /* AppDelegate.h */,
 				36E195FE18A5156800190E84 /* AppDelegate.m */,
 				36E1960018A5156800190E84 /* Main.storyboard */,
-				36E1960618A5156800190E84 /* MainViewController.h */,
-				36FBBF5418A525BD00462208 /* MainViewController.m */,
-				36FBBF5118A5259500462208 /* SettingsViewController.h */,
-				36FBBF5218A5259500462208 /* SettingsViewController.m */,
+				36F4763618A53128007B9C1E /* Main Views */,
 				36FBBF5618A526C600462208 /* Data Management */,
 				36E1960C18A5156800190E84 /* Images.xcassets */,
 				36E1960318A5156800190E84 /* mobileloc.xcdatamodeld */,
@@ -176,6 +179,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		36F4763618A53128007B9C1E /* Main Views */ = {
+			isa = PBXGroup;
+			children = (
+				36E1960618A5156800190E84 /* MainViewController.h */,
+				36FBBF5418A525BD00462208 /* MainViewController.m */,
+				36FBBF5118A5259500462208 /* SettingsViewController.h */,
+				36FBBF5218A5259500462208 /* SettingsViewController.m */,
+			);
+			name = "Main Views";
+			sourceTree = "<group>";
+		};
 		36FBBF5618A526C600462208 /* Data Management */ = {
 			isa = PBXGroup;
 			children = (
@@ -204,9 +218,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 36E1962418A5156900190E84 /* Build configuration list for PBXNativeTarget "mobileloc" */;
 			buildPhases = (
+				46AF2C52B1314FCCA3583740 /* Check Pods Manifest.lock */,
 				36E195E518A5156800190E84 /* Sources */,
 				36E195E618A5156800190E84 /* Frameworks */,
 				36E195E718A5156800190E84 /* Resources */,
+				EF0F7814FC8F49349D57F3EB /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -291,6 +307,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		46AF2C52B1314FCCA3583740 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EF0F7814FC8F49349D57F3EB /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		36E195E518A5156800190E84 /* Sources */ = {
@@ -432,6 +481,7 @@
 		};
 		36E1962518A5156900190E84 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CB0C1BA8AB9C411D9EDF744A /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -446,6 +496,7 @@
 		};
 		36E1962618A5156900190E84 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CB0C1BA8AB9C411D9EDF744A /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
