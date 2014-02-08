@@ -17,7 +17,7 @@
     self = [super init];
     if (self) {
         [MagicalRecord setupCoreDataStack];
-        [Place MR_truncateAll];
+        //[Place MR_truncateAll];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(cleanUpOnExit)
@@ -79,7 +79,12 @@
  */
 -(void)savePlaces:(NSArray*)places {
     
+    NSMutableArray *currentPlaces = [NSMutableArray array];
+    for (Place *place in [Place MR_findAll]) {
+        [currentPlaces addObject:place.name];
+    }
     for (NSDictionary *place in places) {
+        if ([currentPlaces containsObject:place[@"name"]]) continue;
         [self saveNewPlace:place];
     }
     
