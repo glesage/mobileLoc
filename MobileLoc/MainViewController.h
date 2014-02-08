@@ -10,7 +10,9 @@
 
 #import <CoreData/CoreData.h>
 
-@interface MainViewController : UIViewController <SettingsViewControllerDelegate>
+@interface MainViewController : UIViewController <SettingsViewControllerDelegate, UITableViewDelegate, UITableViewDataSource> {
+    IBOutlet UITableView *placeTable;
+}
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 

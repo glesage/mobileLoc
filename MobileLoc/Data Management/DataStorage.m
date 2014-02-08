@@ -17,6 +17,7 @@
     self = [super init];
     if (self) {
         [MagicalRecord setupCoreDataStack];
+        [Place MR_truncateAll];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(cleanUpOnExit)
@@ -45,9 +46,16 @@
     }
     
     /*
+    NSMutableArray *types = [NSMutableArray array];
     for (Place *place in [Place MR_findAll]) {
-        NSLog(@"Place : %@ - %@ - %@", place.name, place.address, place.types);
+        NSArray *placeTypes = [place.types componentsSeparatedByString:@","];
+        for (NSString *type in placeTypes) {
+            if ([types containsObject:type]) continue;
+            [types addObject:type];
+        }
+        //NSLog(@"Place : %@ - %@ - %@", place.name, place.address, place.types);
     }
+    NSLog(@"types: %@", types);
      */
 }
 -(void)saveNewPlace:(NSDictionary*)newPlace {
