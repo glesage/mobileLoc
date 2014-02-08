@@ -76,11 +76,16 @@
                                                     <rect key="frame" x="289" y="29" width="25" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="MTi-IT-ccz">
+                                                    <rect key="frame" x="32" y="32" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="distanceLabel" destination="AkG-EC-ehJ" id="GNV-Yh-sID"/>
                                             <outlet property="icon" destination="CWb-dF-4wD" id="iSp-Xd-Xw4"/>
+                                            <outlet property="imageLoad" destination="MTi-IT-ccz" id="2Wo-9g-RuQ"/>
                                             <outlet property="nameLabel" destination="4eP-FR-4oE" id="H4A-C5-CFt"/>
                                             <outlet property="openLabel" destination="C85-jK-iwA" id="kES-fI-8ag"/>
                                             <outlet property="type2Icon" destination="Z4b-nb-c2A" id="HaI-zZ-9AM"/>

@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *openLabel;
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *imageLoad;
+
 -(void)observeImageUpdates;
 
 @end

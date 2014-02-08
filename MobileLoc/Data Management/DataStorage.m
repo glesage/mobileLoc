@@ -33,17 +33,30 @@
 -(NSArray*)getAllPlaces {
     NSMutableArray *places = [NSMutableArray array];
     for (Place *place in [Place MR_findAll]) {
-        [places addObject:[NSMutableDictionary dictionaryWithDictionary:@{
-                                @"id" : place.objectID,
-                                @"name" : place.name,
-                                @"address" : place.address,
-                                @"latitude" : place.latitude,
-                                @"longitude" : place.longitude,
-                                @"types" : place.types,
-                                @"open" : place.open_now,
-                               }
-                           ]
-         ];
+        NSDictionary *placeDict;
+        if (place.icon_rel) {
+            Icon *placeImage = place.icon_rel;
+            placeDict = @{
+                              @"id" : place.objectID,
+                              @"name" : place.name,
+                              @"address" : place.address,
+                              @"latitude" : place.latitude,
+                              @"longitude" : place.longitude,
+                              @"types" : place.types,
+                              @"open" : place.open_now,
+                              @"image" : [UIImage imageWithData:placeImage.icon]
+                          };
+        }
+        else placeDict = @{
+                               @"id" : place.objectID,
+                               @"name" : place.name,
+                               @"address" : place.address,
+                               @"latitude" : place.latitude,
+                               @"longitude" : place.longitude,
+                               @"types" : place.types,
+                               @"open" : place.open_now,
+                            };
+        [places addObject:[NSMutableDictionary dictionaryWithDictionary:placeDict]];
     }
     
     return [NSArray arrayWithArray:places];

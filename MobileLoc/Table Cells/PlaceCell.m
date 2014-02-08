@@ -15,6 +15,7 @@
 
 @synthesize nameLabel;
 @synthesize icon;
+@synthesize imageLoad;
 
 
 -(void)observeImageUpdates {
@@ -34,6 +35,7 @@
     icon.clipsToBounds = YES;
     
     [icon setImage:placeImage];
+    [imageLoad stopAnimating];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

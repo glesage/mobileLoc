@@ -115,7 +115,10 @@
     NSDictionary *placeData = [places objectAtIndex:indexPath.row];
     [cell.nameLabel setText:placeData[@"name"]];
     
-    if (placeData[@"image"]) [cell.icon setImage:placeData[@"image"]];
+    if (placeData[@"image"]) {
+        [cell.icon setImage:placeData[@"image"]];
+        [cell.imageLoad stopAnimating];
+    }
     if ([placeData[@"open"] intValue] == 1) {
         [cell.openLabel setText:@"OPEN"];
         [cell.openLabel setTextColor:[UIColor colorWithRed:0.373 green:0.698 blue:0.255 alpha:0.9]];
