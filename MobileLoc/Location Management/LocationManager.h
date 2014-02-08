@@ -16,4 +16,7 @@
 + (LocationManager *)sharedManager;
 -(CLLocation*)getCurrentLocation;
 
+-(int)distanceBetweenCurrentAnd:(CLLocation*)to;
+-(NSString*)userFriendlyDistanceMiles:(int)distanceMeters;
+
 @end

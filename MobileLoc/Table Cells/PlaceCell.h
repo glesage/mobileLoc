@@ -22,5 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *imageLoad;
 
 -(void)observeImageUpdates;
+-(void)setMainIcon:(UIImage*)image;
+-(void)setOpen:(BOOL)open;
 
 @end

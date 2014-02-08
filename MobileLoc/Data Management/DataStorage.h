@@ -10,7 +10,9 @@
 
 @interface DataStorage : NSObject <NSFetchedResultsControllerDelegate>
 
--(void)savePlaces:(NSArray*)places;
+-(BOOL)savePlaces:(NSArray*)places;
+-(void)saveImage:(UIImage*)image forPlace:(NSString*)placeName;
+
 -(NSArray*)getAllPlaces;
 
 @end

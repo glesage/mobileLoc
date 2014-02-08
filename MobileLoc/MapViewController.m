@@ -45,12 +45,9 @@
 
 -(void)setMapToUserLocation
 {
-    CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(41.942, -87.645);
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(coord,MAP_SPAN, MAP_SPAN);
-    /*
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance([[LocationManager sharedManager] getCurrentLocation].coordinate,
                                                                        MAP_SPAN, MAP_SPAN);
-     */
+
     [_mapView setRegion:[_mapView regionThatFits:viewRegion] animated:YES];
     [UIView commitAnimations];
 }
@@ -89,6 +86,9 @@
         return annotationView;
     }
     return nil;
+}
+-(void)mapViewControllerDidFinish:(MapViewController *)controller {
+    NSLog(@"Finished");
 }
 
 

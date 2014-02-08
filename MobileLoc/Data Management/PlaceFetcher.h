@@ -11,6 +11,9 @@
 #import "GooglePlaces.h"
 #import "GooglePlaceImages.h"
 
+#import "Foursquare.h"
+#import "FoursquareImages.h"
+
 @protocol PlaceFetcherDelegate
 - (void)pfGotAllPlaces:(NSArray*)places;
 - (void)pfFailedToGetPlaces:(NSError*)error;
@@ -19,10 +22,15 @@
 
 @end
 
-@interface PlaceFetcher : NSObject <GooglePlacesDelegate, GooglePlaceImagesDelegate> {
+@interface PlaceFetcher : NSObject <GooglePlacesDelegate, GooglePlaceImagesDelegate, FoursquareDelegate, FoursquareImagesDelegate>
+{
     GooglePlaces *googlePlaces;
     GooglePlaceImages *googlePlaceImages;
     BOOL gotGP;
+    
+    Foursquare *fsq;
+    FoursquareImages *fsqImages;
+    BOOL gotFSQ;
     
     NSTimer *timeOutTimer;
     

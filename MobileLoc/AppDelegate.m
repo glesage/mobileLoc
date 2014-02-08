@@ -10,11 +10,12 @@
 
 #import "MainViewController.h"
 
+#import <Foursquare2.h>
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    //[MagicalRecord setupCoreDataStack];
     [MagicalRecord setupAutoMigratingCoreDataStack];
     return YES;
 }
@@ -46,5 +47,10 @@
     // Saves changes in the application's managed object context before the application terminates.
     [[NSNotificationCenter defaultCenter] postNotificationName:@"APP_WILL_TERMINATE_NOTIF" object:nil];    
 }
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [Foursquare2 handleURL:url];
+}
+
 
 @end

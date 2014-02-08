@@ -7,10 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36195F3118A637C7005DF553 /* GooglePlaceImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 36195F3018A637C7005DF553 /* GooglePlaceImages.m */; };
+		36195F3418A64CEA005DF553 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36195F3318A64CEA005DF553 /* MapViewController.m */; };
+		36195F3618A64DFF005DF553 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36195F3518A64DFF005DF553 /* MapKit.framework */; };
+		36195F3918A65394005DF553 /* MyLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 36195F3818A65394005DF553 /* MyLocation.m */; };
 		369981D718A5556700069F6D /* DataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 369981D618A5556700069F6D /* DataStorage.m */; };
-		369981E718A5B2EA00069F6D /* Icon.m in Sources */ = {isa = PBXBuildFile; fileRef = 369981E618A5B2EA00069F6D /* Icon.m */; };
-		369981EA18A5B2EB00069F6D /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = 369981E918A5B2EB00069F6D /* Place.m */; };
 		369981ED18A6157000069F6D /* PlaceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 369981EC18A6157000069F6D /* PlaceCell.m */; };
+		369DC8BD18A688D200E37461 /* FoursquareImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 369DC8BC18A688D200E37461 /* FoursquareImages.m */; };
+		369DC8C018A69EA800E37461 /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = 369DC8BF18A69EA800E37461 /* Place.m */; };
+		369DC8C318A69EA800E37461 /* Icon.m in Sources */ = {isa = PBXBuildFile; fileRef = 369DC8C218A69EA800E37461 /* Icon.m */; };
+		36D359E518A66E0400570F65 /* Foursquare.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D359E418A66E0400570F65 /* Foursquare.m */; };
 		36E195ED18A5156800190E84 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E195EC18A5156800190E84 /* Foundation.framework */; };
 		36E195EF18A5156800190E84 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E195EE18A5156800190E84 /* CoreGraphics.framework */; };
 		36E195F118A5156800190E84 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E195F018A5156800190E84 /* UIKit.framework */; };
@@ -49,14 +55,25 @@
 
 /* Begin PBXFileReference section */
 		03B74C7E999846DA8F71F6C9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		36195F2F18A637C7005DF553 /* GooglePlaceImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GooglePlaceImages.h; path = "Data Management/Places Third Parties/GooglePlaceImages.h"; sourceTree = "<group>"; };
+		36195F3018A637C7005DF553 /* GooglePlaceImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GooglePlaceImages.m; path = "Data Management/Places Third Parties/GooglePlaceImages.m"; sourceTree = "<group>"; };
+		36195F3218A64CEA005DF553 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		36195F3318A64CEA005DF553 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		36195F3518A64DFF005DF553 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		36195F3718A65394005DF553 /* MyLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyLocation.h; path = "Location Management/MyLocation.h"; sourceTree = "<group>"; };
+		36195F3818A65394005DF553 /* MyLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyLocation.m; path = "Location Management/MyLocation.m"; sourceTree = "<group>"; };
 		369981D518A5556700069F6D /* DataStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataStorage.h; path = "Data Management/DataStorage.h"; sourceTree = "<group>"; };
 		369981D618A5556700069F6D /* DataStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataStorage.m; path = "Data Management/DataStorage.m"; sourceTree = "<group>"; };
-		369981E518A5B2EA00069F6D /* Icon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Icon.h; path = "Data Management/Core Data/Icon.h"; sourceTree = "<group>"; };
-		369981E618A5B2EA00069F6D /* Icon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Icon.m; path = "Data Management/Core Data/Icon.m"; sourceTree = "<group>"; };
-		369981E818A5B2EB00069F6D /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Place.h; path = "Data Management/Core Data/Place.h"; sourceTree = "<group>"; };
-		369981E918A5B2EB00069F6D /* Place.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Place.m; path = "Data Management/Core Data/Place.m"; sourceTree = "<group>"; };
 		369981EB18A6157000069F6D /* PlaceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlaceCell.h; path = "Table Cells/PlaceCell.h"; sourceTree = "<group>"; };
 		369981EC18A6157000069F6D /* PlaceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlaceCell.m; path = "Table Cells/PlaceCell.m"; sourceTree = "<group>"; };
+		369DC8BB18A688D200E37461 /* FoursquareImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FoursquareImages.h; path = "Data Management/Places Third Parties/FoursquareImages.h"; sourceTree = "<group>"; };
+		369DC8BC18A688D200E37461 /* FoursquareImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FoursquareImages.m; path = "Data Management/Places Third Parties/FoursquareImages.m"; sourceTree = "<group>"; };
+		369DC8BE18A69EA800E37461 /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Place.h; path = "Data Management/Core Data/Place.h"; sourceTree = "<group>"; };
+		369DC8BF18A69EA800E37461 /* Place.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Place.m; path = "Data Management/Core Data/Place.m"; sourceTree = "<group>"; };
+		369DC8C118A69EA800E37461 /* Icon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Icon.h; path = "Data Management/Core Data/Icon.h"; sourceTree = "<group>"; };
+		369DC8C218A69EA800E37461 /* Icon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Icon.m; path = "Data Management/Core Data/Icon.m"; sourceTree = "<group>"; };
+		36D359E318A66E0400570F65 /* Foursquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Foursquare.h; path = "Data Management/Places Third Parties/Foursquare.h"; sourceTree = "<group>"; };
+		36D359E418A66E0400570F65 /* Foursquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Foursquare.m; path = "Data Management/Places Third Parties/Foursquare.m"; sourceTree = "<group>"; };
 		36E195E918A5156800190E84 /* mobileloc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mobileloc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36E195EC18A5156800190E84 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		36E195EE18A5156800190E84 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -97,6 +114,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36195F3618A64DFF005DF553 /* MapKit.framework in Frameworks */,
 				36F4763818A53B6F007B9C1E /* CoreLocation.framework in Frameworks */,
 				36E195EF18A5156800190E84 /* CoreGraphics.framework in Frameworks */,
 				36E195F318A5156800190E84 /* CoreData.framework in Frameworks */,
@@ -123,10 +141,10 @@
 		369981DE18A565E400069F6D /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				369981E818A5B2EB00069F6D /* Place.h */,
-				369981E918A5B2EB00069F6D /* Place.m */,
-				369981E518A5B2EA00069F6D /* Icon.h */,
-				369981E618A5B2EA00069F6D /* Icon.m */,
+				369DC8C118A69EA800E37461 /* Icon.h */,
+				369DC8C218A69EA800E37461 /* Icon.m */,
+				369DC8BE18A69EA800E37461 /* Place.h */,
+				369DC8BF18A69EA800E37461 /* Place.m */,
 			);
 			name = "Core Data";
 			sourceTree = "<group>";
@@ -163,6 +181,7 @@
 		36E195EB18A5156800190E84 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				36195F3518A64DFF005DF553 /* MapKit.framework */,
 				36F4763718A53B6F007B9C1E /* CoreLocation.framework */,
 				36E195EC18A5156800190E84 /* Foundation.framework */,
 				36E195EE18A5156800190E84 /* CoreGraphics.framework */,
@@ -227,6 +246,8 @@
 				36FBBF5418A525BD00462208 /* MainViewController.m */,
 				36FBBF5118A5259500462208 /* SettingsViewController.h */,
 				36FBBF5218A5259500462208 /* SettingsViewController.m */,
+				36195F3218A64CEA005DF553 /* MapViewController.h */,
+				36195F3318A64CEA005DF553 /* MapViewController.m */,
 			);
 			name = "Main Views";
 			sourceTree = "<group>";
@@ -234,6 +255,8 @@
 		36F4763C18A5481F007B9C1E /* Location Management */ = {
 			isa = PBXGroup;
 			children = (
+				36195F3718A65394005DF553 /* MyLocation.h */,
+				36195F3818A65394005DF553 /* MyLocation.m */,
 				36F4763918A5481B007B9C1E /* LocationManager.h */,
 				36F4763A18A5481B007B9C1E /* LocationManager.m */,
 			);
@@ -260,6 +283,12 @@
 			children = (
 				36FBBF6018A52AB600462208 /* GooglePlaces.h */,
 				36FBBF6118A52AB600462208 /* GooglePlaces.m */,
+				36195F2F18A637C7005DF553 /* GooglePlaceImages.h */,
+				36195F3018A637C7005DF553 /* GooglePlaceImages.m */,
+				36D359E318A66E0400570F65 /* Foursquare.h */,
+				36D359E418A66E0400570F65 /* Foursquare.m */,
+				369DC8BB18A688D200E37461 /* FoursquareImages.h */,
+				369DC8BC18A688D200E37461 /* FoursquareImages.m */,
 			);
 			name = "Places Third Parties";
 			sourceTree = "<group>";
@@ -399,17 +428,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				369DC8BD18A688D200E37461 /* FoursquareImages.m in Sources */,
 				36E1960518A5156800190E84 /* mobileloc.xcdatamodeld in Sources */,
+				369DC8C318A69EA800E37461 /* Icon.m in Sources */,
 				369981D718A5556700069F6D /* DataStorage.m in Sources */,
 				36FBBF5918A5278400462208 /* DataManager.m in Sources */,
-				369981EA18A5B2EB00069F6D /* Place.m in Sources */,
 				36E195FF18A5156800190E84 /* AppDelegate.m in Sources */,
+				36D359E518A66E0400570F65 /* Foursquare.m in Sources */,
 				369981ED18A6157000069F6D /* PlaceCell.m in Sources */,
+				36195F3918A65394005DF553 /* MyLocation.m in Sources */,
 				36F4763B18A5481B007B9C1E /* LocationManager.m in Sources */,
+				369DC8C018A69EA800E37461 /* Place.m in Sources */,
 				36E195FB18A5156800190E84 /* main.m in Sources */,
+				36195F3118A637C7005DF553 /* GooglePlaceImages.m in Sources */,
 				36FBBF5F18A5299300462208 /* PlaceFetcher.m in Sources */,
-				369981E718A5B2EA00069F6D /* Icon.m in Sources */,
 				36FBBF5518A525BD00462208 /* MainViewController.m in Sources */,
+				36195F3418A64CEA005DF553 /* MapViewController.m in Sources */,
 				36FBBF6218A52AB600462208 /* GooglePlaces.m in Sources */,
 				36FBBF5318A5259500462208 /* SettingsViewController.m in Sources */,
 			);

@@ -7,10 +7,11 @@
 //
 
 #import "SettingsViewController.h"
+#import "MapViewController.h"
 
 #import <CoreData/CoreData.h>
 
-@interface MainViewController : UIViewController <SettingsViewControllerDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface MainViewController : UIViewController <SettingsViewControllerDelegate, MapViewControllerDelegate, UITableViewDelegate, UITableViewDataSource>
 {
     IBOutlet __weak UITableView *placeTable;
     IBOutlet UIToolbar *toolbar;

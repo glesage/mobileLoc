@@ -19,7 +19,7 @@
 
 /*
  * Queries Google Places for all places
- * within SEARCH_RADIUS meters of the given location
+ * within proximity of the given location
  */
 -(void)fetchGooglePlacesAround:(CLLocationCoordinate2D)coordinates {
     
@@ -28,11 +28,18 @@
     
     NSString *coordinatesParam = [NSString stringWithFormat:@"%f, %f", coordinates.latitude, coordinates.longitude];
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    int radius = 500;
+    if ([defaults objectForKey:@"distance"]) radius = [[defaults objectForKey:@"distance"] intValue];
+    
+    //also "open now" parameter
+    
     [manager GET:[[NSURL URLWithString:GP_BASE_URL] absoluteString]
       parameters:@{
                        @"key": GP_API_KEY,
                        @"location": coordinatesParam,
-                       @"radius": SEARCH_RADIUS,
+                       @"radius": [NSNumber numberWithInt:radius],
                        @"sensor": @"true",
                        @"language": @"en"
                    }
@@ -89,13 +96,14 @@
         }
         
         NSDictionary *finalPlace = @{
-                                     @"name" : place[@"name"],
-                                     @"latitude" : place[@"geometry"][@"location"][@"lat"],
+                                     @"name" :      place[@"name"],
+                                     @"distance" :  @0,
+                                     @"latitude" :  place[@"geometry"][@"location"][@"lat"],
                                      @"longitude" : place[@"geometry"][@"location"][@"lng"],
-                                     @"address" : place[@"vicinity"],
-                                     @"open" : openNow,
-                                     @"types" : [NSString stringWithString:types],
-                                     @"icon" : iconReference
+                                     @"open" :      openNow,
+                                     @"types" :     [NSString stringWithString:types],
+                                     @"source" :    @"google",
+                                     @"icon" :      iconReference
                                      };
         [places addObject:finalPlace];
     }

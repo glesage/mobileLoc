@@ -33,9 +33,7 @@ static DataManager *sharedDataManager;
         placeFetcher = [[PlaceFetcher alloc] init];
         [placeFetcher setDelegate:self];
 
-        //[placeFetcher fetchPlacesAround:[[LocationManager sharedManager] getCurrentLocation]];
-        //Test home location
-        [placeFetcher fetchPlacesAround:[[CLLocation alloc] initWithLatitude:41.942 longitude:-87.645]];
+        [placeFetcher fetchPlacesAround:[[LocationManager sharedManager] getCurrentLocation]];
     }
     return self;
 }
@@ -43,15 +41,15 @@ static DataManager *sharedDataManager;
 -(NSArray*)getAllPlaces {
     return [dataStorage getAllPlaces];
 }
--(UIImage*)getImageForPlace:(NSString*)placeId {
-    return [dataStorage getImageForPlace:placeId];
-}
 
 
 # pragma mark - PlaceFetcherDelegate
 
--(void)pfGotAllPlaces:(NSArray *)places {
-    [dataStorage savePlaces:places];
+-(void)pfGotAllPlaces:(NSArray *)places
+{
+    if (![dataStorage savePlaces:places]) return; // If no new places have been saved, no need to change the UI!
+    
+    // Otherwise, inform the world that we've got news
     [[NSNotificationCenter defaultCenter] postNotificationName:GOT_NEW_PLACES
                                                         object:nil];
     // Then proceed to fetch images

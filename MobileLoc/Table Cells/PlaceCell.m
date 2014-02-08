@@ -22,6 +22,25 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotNewImage:) name:GOT_NEW_IMAGE object:nil];
 }
 
+-(void)setOpen:(BOOL)open {
+    if (open) {
+        [self.openLabel setText:@"OPEN"];
+        [self.openLabel setTextColor:[UIColor colorWithRed:0.373 green:0.698 blue:0.255 alpha:0.9]];
+    }
+    else {
+        [self.openLabel setText:@"CLOSED"];
+        [self.openLabel setTextColor:[UIColor lightGrayColor]];
+    }
+
+}
+
+-(void)setMainIcon:(UIImage*)image {
+    icon.layer.cornerRadius = 10.0;
+    icon.clipsToBounds = YES;
+    
+    [icon setImage:image];
+    [imageLoad stopAnimating];
+}
 -(void)gotNewImage:(NSNotification*)notification {
     if (![notification.userInfo objectForKey:@"image"]) return;
     if (![notification.userInfo objectForKey:@"placeName"]) return;
@@ -31,18 +50,12 @@
     
     if (![nameLabel.text isEqualToString:placeName]) return;
     
-    icon.layer.cornerRadius = 10.0;
-    icon.clipsToBounds = YES;
-    
-    [icon setImage:placeImage];
-    [imageLoad stopAnimating];
+    [self setMainIcon:placeImage];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 @end

@@ -8,7 +8,11 @@
 
 #import "LocationManager.h"
 
+#define METERS_TO_MILES 0.000621371
+
+
 @implementation LocationManager
+
 
 static LocationManager *sharedLocManager;
 
@@ -35,6 +39,17 @@ static LocationManager *sharedLocManager;
 -(CLLocation*)getCurrentLocation {
     CLLocation *currentLocation = [[locationManager location] copy];
     return currentLocation;
+}
+-(int)distanceBetweenCurrentAnd:(CLLocation*)to {
+    return [[NSNumber numberWithDouble:[to distanceFromLocation:locationManager.location]] intValue];
+}
+-(NSString*)userFriendlyDistanceMiles:(int)distanceMeters
+{
+    double distance = distanceMeters * METERS_TO_MILES;
+    
+    if (distance < 1) return [NSString stringWithFormat:@"%.2f miles away", distance];
+    if (distance < 5) return [NSString stringWithFormat:@"%.1f miles away", distance];
+    return [NSString stringWithFormat:@"%.0f miles away", distance];
 }
 
 @end

@@ -44,7 +44,7 @@
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [toolbar setFrame:CGRectMake(160, 0, 320, 66)];
+    if (!places || places.count < 1) [self gotNewPlaces];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotNewPlaces) name:GOT_NEW_PLACES object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unableToFetchPlaces:) name:UNABLE_TO_FETCH_PLACES object:nil];
@@ -54,7 +54,9 @@
 #pragma mark - Data Handlers
 
 -(void)gotNewPlaces {
+    [places removeAllObjects];
     [places addObjectsFromArray:[[DataManager sharedManager] getAllPlaces]];
+    [placeTable setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     [placeTable reloadData];
 }
 
@@ -97,8 +99,6 @@
 }
 
 
-
-
 #pragma mark - TableView Delegate & Datasource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -126,17 +126,16 @@
     NSDictionary *placeData = [places objectAtIndex:indexPath.row];
     [cell.nameLabel setText:placeData[@"name"]];
     
-    if (placeData[@"image"]) {
-        [cell.icon setImage:placeData[@"image"]];
-        [cell.imageLoad stopAnimating];
-    }
-    if ([placeData[@"open"] intValue] == 1) {
-        [cell.openLabel setText:@"OPEN"];
-        [cell.openLabel setTextColor:[UIColor colorWithRed:0.373 green:0.698 blue:0.255 alpha:0.9]];
-    }
+    // Main Photo
+    if (placeData[@"image"]) [cell setMainIcon:placeData[@"image"]];
+
+    // Open Status
+    if ([placeData[@"source"] isEqualToString:@"foursquare"])
+         [cell.openLabel setText:@"-"];
+    else [cell setOpen:[placeData[@"open"] boolValue]];
     
     // Distance
-    [cell.distanceLabel setText:@"0.2 miles away"];
+    [cell.distanceLabel setText:[self getDistanceLabelForPlace:placeData]];
     
     // Types
     NSArray *types = [placeData[@"types"] componentsSeparatedByString:@","];
@@ -208,6 +207,18 @@
     type = [type stringByReplacingOccurrencesOfString:@"_"
                                            withString:@" "];
     return type;
+}
+-(NSString*)getDistanceLabelForPlace:(NSDictionary*)place {
+    int distance = 0;
+    if ([place[@"source"] isEqualToString:@"foursquare"]) distance = [place[@"distance"] intValue];
+    else {
+        CLLocation *placeLoc = [[CLLocation alloc] initWithLatitude:[place[@"latitude"] doubleValue]
+                                                          longitude:[place[@"longitude"] doubleValue]];
+        
+        distance = [[LocationManager sharedManager] distanceBetweenCurrentAnd:placeLoc];
+    }
+    
+    return [[LocationManager sharedManager] userFriendlyDistanceMiles:distance];
 }
 // END UTILITIES //
 

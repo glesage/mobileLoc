@@ -62,7 +62,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="85" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="lXN-9j-4Hl">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="85" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="lXN-9j-4Hl">
                                 <rect key="frame" x="0.0" y="66" width="320" height="502"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -71,23 +71,23 @@
                                         <rect key="frame" x="0.0" y="22" width="320" height="85"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EeR-b5-eSi" id="The-aU-Zxg">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="84"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="85"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Belly" translatesAutoresizingMaskIntoConstraints="NO" id="CWb-dF-4wD" userLabel="Image">
-                                                    <rect key="frame" x="10" y="10" width="64" height="64"/>
+                                                    <rect key="frame" x="10" y="10" width="64" height="65"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="place" translatesAutoresizingMaskIntoConstraints="NO" id="moY-bi-vIn" userLabel="Type 1 Icon">
-                                                    <rect key="frame" x="82" y="55" width="12" height="12"/>
+                                                    <rect key="frame" x="82" y="55" width="12" height="13"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
                                                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z4b-nb-c2A" userLabel="Type 2 Icon">
-                                                    <rect key="frame" x="94" y="55" width="12" height="12"/>
+                                                    <rect key="frame" x="94" y="55" width="12" height="13"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
                                                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sm8-ac-7fC" userLabel="Type 3 Icon">
-                                                    <rect key="frame" x="106" y="55" width="12" height="12"/>
+                                                    <rect key="frame" x="106" y="55" width="12" height="13"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g9M-oB-mU3" userLabel="Types Label">
@@ -146,11 +146,12 @@
                                     <outlet property="delegate" destination="rQl-PL-IFJ" id="WkQ-qP-cym"/>
                                 </connections>
                             </tableView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nh3-AF-kwq">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nh3-AF-kwq">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="66"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="0.13698645149999999" green="0.70863269100000004" blue="0.90816326530000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="WqF-ri-kdx"/>
                                     <constraint firstAttribute="height" constant="66" id="ahT-Bl-HBF"/>
                                 </constraints>
                                 <items>
@@ -178,6 +179,14 @@
                         </subviews>
                         <color key="backgroundColor" red="0.13698645147867486" green="0.70863269103977922" blue="0.90816326530612246" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Nh3-AF-kwq" firstAttribute="leading" secondItem="lXN-9j-4Hl" secondAttribute="leading" id="7vd-cH-Eu7"/>
+                            <constraint firstItem="Nh3-AF-kwq" firstAttribute="top" secondItem="l9E-07-oys" secondAttribute="top" id="84Y-5J-sgg"/>
+                            <constraint firstItem="Nh3-AF-kwq" firstAttribute="bottom" secondItem="lXN-9j-4Hl" secondAttribute="top" id="9JW-He-T95"/>
+                            <constraint firstItem="Nh3-AF-kwq" firstAttribute="trailing" secondItem="lXN-9j-4Hl" secondAttribute="trailing" id="AUk-D5-zsy"/>
+                            <constraint firstItem="Nh3-AF-kwq" firstAttribute="leading" secondItem="l9E-07-oys" secondAttribute="leading" id="Nlt-0v-zlc"/>
+                            <constraint firstAttribute="bottom" secondItem="lXN-9j-4Hl" secondAttribute="bottom" id="lha-8H-mqv"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="placeTable" destination="lXN-9j-4Hl" id="XSa-Ou-kf1"/>
@@ -217,76 +226,83 @@
                                 <color key="tintColor" red="0.13698645149999999" green="0.70863269100000004" blue="0.90816326530000002" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="500" minValue="0.0" maxValue="1000" translatesAutoresizingMaskIntoConstraints="NO" id="h6R-ae-Ezh" userLabel="Distance Slider">
-                                <rect key="frame" x="18" y="147" width="284" height="34"/>
+                                <rect key="frame" x="18" y="153" width="284" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="minimumTrackTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="distanceSliderChanged:" destination="kIf-nA-PKG" eventType="valueChanged" id="dJ9-jq-Wav"/>
+                                </connections>
                             </slider>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Maximum distance:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dxb-eF-oU5" userLabel="Distance Label">
-                                <rect key="frame" x="50" y="118" width="151" height="21"/>
+                                <rect key="frame" x="50" y="124" width="151" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="500" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jhl-RD-Ulq" userLabel="Distance">
-                                <rect key="frame" x="211" y="118" width="59" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="500 m" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jhl-RD-Ulq" userLabel="Distance">
+                                <rect key="frame" x="211" y="124" width="59" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Open only" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uro-pb-kWl" userLabel="Open Label">
-                                <rect key="frame" x="62" y="229" width="104" height="21"/>
+                                <rect key="frame" x="62" y="254" width="104" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fHX-F4-zki" userLabel="Open Switch">
-                                <rect key="frame" x="179" y="224" width="51" height="31"/>
+                                <rect key="frame" x="179" y="249" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="onTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="switchChanged:" destination="kIf-nA-PKG" eventType="valueChanged" id="kUO-KT-zz7"/>
+                                </connections>
                             </switch>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Google Places" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fiy-f0-hot" userLabel="Google Label">
-                                <rect key="frame" x="57" y="322" width="112" height="21"/>
+                                <rect key="frame" x="57" y="358" width="112" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fBg-eF-068" userLabel="Google Switch">
-                                <rect key="frame" x="179" y="317" width="51" height="31"/>
+                                <rect key="frame" x="179" y="353" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="onTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="switchChanged:" destination="kIf-nA-PKG" eventType="valueChanged" id="ibl-vh-vFl"/>
+                                </connections>
                             </switch>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Foursquare" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zuz-Fj-9T3" userLabel="Foursquare Label">
-                                <rect key="frame" x="57" y="369" width="112" height="21"/>
+                                <rect key="frame" x="57" y="405" width="112" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Rm-4s-X56" userLabel="Foursquare Switch">
-                                <rect key="frame" x="179" y="364" width="51" height="31"/>
+                                <rect key="frame" x="179" y="400" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="onTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </switch>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Yelp" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pWd-p9-QFq" userLabel="Yelp Label">
-                                <rect key="frame" x="57" y="420" width="112" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1gA-8a-r7Y" userLabel="Yelp Switch">
-                                <rect key="frame" x="179" y="415" width="51" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="onTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="switchChanged:" destination="kIf-nA-PKG" eventType="valueChanged" id="kCz-14-vrF"/>
+                                </connections>
                             </switch>
                         </subviews>
                         <color key="backgroundColor" red="0.13698645149999999" green="0.70863269100000004" blue="0.90816326530000002" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="UWS-Wn-PzU"/>
+                    <connections>
+                        <outlet property="distanceLabel" destination="jhl-RD-Ulq" id="IPJ-Hl-HrQ"/>
+                        <outlet property="distanceSlider" destination="h6R-ae-Ezh" id="E15-Vd-ysY"/>
+                        <outlet property="foursquareSwitch" destination="0Rm-4s-X56" id="bpr-MX-oEi"/>
+                        <outlet property="googleSwitch" destination="fBg-eF-068" id="VNF-DX-djh"/>
+                        <outlet property="openSwitch" destination="fHX-F4-zki" id="ExK-qX-owz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xlJ-1o-FvB" sceneMemberID="firstResponder"/>
             </objects>

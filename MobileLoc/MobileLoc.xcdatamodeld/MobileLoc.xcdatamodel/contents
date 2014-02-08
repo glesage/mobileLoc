@@ -2,16 +2,17 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13B42" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Icon" representedClassName="Icon" syncable="YES">
         <attribute name="icon" optional="YES" attributeType="Binary" syncable="YES"/>
-        <relationship name="places" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Place" inverseName="icon_rel" inverseEntity="Place" syncable="YES"/>
+        <relationship name="places_rel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Place" inverseName="icon_rel" inverseEntity="Place" syncable="YES"/>
     </entity>
     <entity name="Place" representedClassName="Place" syncable="YES">
-        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="distance" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="open_now" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="source" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="types" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="icon_rel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Icon" inverseName="places" inverseEntity="Icon" syncable="YES"/>
+        <relationship name="icon_rel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Icon" inverseName="places_rel" inverseEntity="Icon" syncable="YES"/>
     </entity>
     <elements>
         <element name="Icon" positionX="0" positionY="0" width="0" height="0"/>
