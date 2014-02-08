@@ -19,4 +19,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *openLabel;
 
+-(void)observeImageUpdates;
+
 @end

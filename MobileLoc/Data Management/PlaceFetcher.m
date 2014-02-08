@@ -22,6 +22,9 @@
     return self;
 }
 
+
+#pragma mark - Callbacks
+
 /*
  * Instanciates all third party API fetchers
  * and calls to each to get places.
@@ -29,7 +32,10 @@
  * Also starts the timeout timer to make sure 
  * the user does not wait too long...
  */
--(void)fetchPlacesAround:(CLLocation*)location {
+-(void)fetchPlacesAround:(CLLocation*)location
+{
+    [allPlaces removeAllObjects];
+    
     googlePlaces = [[GooglePlaces alloc] initWithLocation:location];
     [googlePlaces setDelegate:self];
     gotGP = FALSE;
@@ -47,6 +53,7 @@
  */
 -(void)reachedTimeout {
     [googlePlaces cancelFetching];
+    [googlePlaceImages cancelFetching];
     
     [self.delegate pfTimedOut];
 }
@@ -54,7 +61,7 @@
 /*
  * Gets called everytime a third party returns places
  *
- * Checks if all third parties have returned places
+ * Checks if all third-parties have returned places
  * If so, it returns all the places to the delegate
  */
 -(void)gotMorePlaces:(NSArray*)places {
@@ -72,15 +79,41 @@
 }
 
 
-# pragma mark - GooglePlacesDelegate
+/*
+ * Instanciates all third-party API fetchers
+ * and calls to each to get each place's image.
+ */
+-(void)fetchImagesForAllPlaces
+{
+    googlePlaceImages = [[GooglePlaceImages alloc] initWithPlaces:allPlaces];
+    [googlePlaceImages setDelegate:self];
+    [allPlaces removeAllObjects];
+}
 
--(void)gpGotPlaces:(NSArray *)places {
+
+# pragma mark - Third-party Place delegates
+
+// GooglePlaces Delegate
+-(void)gpGotPlaces:(NSArray *)places
+{
     gotGP = YES;
-    NSLog(@"Got Google places");
-    [self gotMorePlaces:places];}
-
+    [self gotMorePlaces:places];
+}
 -(void)gpFailedToGetPlaces:(NSError *)error {
     NSLog(@"Failed to get Google places - %@", error.description);
+}
+
+
+# pragma mark - Third-party image delegate
+
+// GooglePlaceImages Delegate
+-(void)gpiGotImage:(UIImage*)image for:(NSString*)placeName
+{
+    if (!image) return;
+    [self.delegate pfGotImage:image for:placeName];
+}
+-(void)gpiFailedToGetImages:(NSError *)error {
+    NSLog(@"Failed to get Google Place Images - %@", error.description);
 }
 
 

@@ -30,7 +30,7 @@
                                            otherButtonTitles:nil];
     [alertV show];
 }
-- (void)viewDidLoad
+-(void)viewDidLoad
 {
     [super viewDidLoad];
     
@@ -108,16 +108,23 @@
         cell = [[PlaceCell alloc] initWithStyle:UITableViewCellStyleDefault
                                 reuseIdentifier:CellIdentifier];
     }
+    [cell observeImageUpdates];
     
+    
+    // Setup the Cell content
     NSDictionary *placeData = [places objectAtIndex:indexPath.row];
     [cell.nameLabel setText:placeData[@"name"]];
     
-    if (placeData[@"open"]) {
+    if (placeData[@"image"]) [cell.icon setImage:placeData[@"image"]];
+    if ([placeData[@"open"] intValue] == 1) {
         [cell.openLabel setText:@"OPEN"];
         [cell.openLabel setTextColor:[UIColor colorWithRed:0.373 green:0.698 blue:0.255 alpha:0.9]];
     }
     
-    // Types business
+    // Distance
+    [cell.distanceLabel setText:@"0.2 miles away"];
+    
+    // Types
     NSArray *types = [placeData[@"types"] componentsSeparatedByString:@","];
     NSString *type = [self getFormattedType:types[0]];
     
@@ -174,8 +181,6 @@
         }
         
     }
-    
-    [cell.distanceLabel setText:@"Quite close!"];
     
     return cell;
 }

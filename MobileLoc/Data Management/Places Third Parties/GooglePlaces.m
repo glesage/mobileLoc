@@ -9,13 +9,6 @@
 #import "GooglePlaces.h"
 
 
-static NSString *const GP_BASE_URL = @"https://maps.googleapis.com/maps/api/place/nearbysearch/json";
-static NSString *const GPP_BASE_URL = @"https://maps.googleapis.com/maps/api/place/photo";
-
-#define GP_API_KEY @"AIzaSyCeABNGmxmHWXWt-0Jsq-lwzSJL7ZG_Omk"
-#define SEARCH_RADIUS @"500"
-
-
 @implementation GooglePlaces
 
 -(id)initWithLocation:(CLLocation*)location {
@@ -110,30 +103,6 @@ static NSString *const GPP_BASE_URL = @"https://maps.googleapis.com/maps/api/pla
 }
 -(NSString*)trimWhiteSpaceFrom:(NSString*)inputString {
     return [inputString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-}
-
-/*
- * Queries Google Places for the photo image of a given place
- */
--(void)queueImageFetchingForPlace:(NSDictionary*)place {
-    manager.responseSerializer = [AFImageResponseSerializer serializer];
-    
-    NSString *imageReference = place[@"photos"][0][@"photo_reference"];
-    [manager GET:[[NSURL URLWithString:GPP_BASE_URL] absoluteString]
-      parameters:@{
-                       @"key": GP_API_KEY,
-                       @"photoreference": imageReference,
-                       @"maxheight": @"80",
-                       @"sensor": @"true"
-                   }
-         success:^(NSURLSessionDataTask *task, id responseObject) {
-             //responseObject is a UImage
-             //[place setObject:[self getImageForPlace:place] forKey:@"image"];
-             //[place removeObjectForKey:@"photos"];
-         }
-         failure:^(NSURLSessionDataTask *task, NSError *error) {
-             NSLog(@"Failed to get image: %@", error.description);
-         }];
 }
 
 -(void)cancelFetching {

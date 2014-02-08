@@ -7,16 +7,33 @@
 //
 
 #import "PlaceCell.h"
+#import "DataManager.h"
+
+#import <QuartzCore/QuartzCore.h>
 
 @implementation PlaceCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
-    }
-    return self;
+@synthesize nameLabel;
+@synthesize icon;
+
+
+-(void)observeImageUpdates {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotNewImage:) name:GOT_NEW_IMAGE object:nil];
+}
+
+-(void)gotNewImage:(NSNotification*)notification {
+    if (![notification.userInfo objectForKey:@"image"]) return;
+    if (![notification.userInfo objectForKey:@"placeName"]) return;
+    
+    UIImage *placeImage = notification.userInfo[@"image"];
+    NSString *placeName = notification.userInfo[@"placeName"];
+    
+    if (![nameLabel.text isEqualToString:placeName]) return;
+    
+    icon.layer.cornerRadius = 10.0;
+    icon.clipsToBounds = YES;
+    
+    [icon setImage:placeImage];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

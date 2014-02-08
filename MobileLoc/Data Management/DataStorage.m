@@ -31,24 +31,36 @@
  * Data Accessors
  */
 -(NSArray*)getAllPlaces {
-    
-    
     NSMutableArray *places = [NSMutableArray array];
     for (Place *place in [Place MR_findAll]) {
-        [places addObject:@{
-                               @"name" : place.name,
-                               @"address" : place.address,
-                               @"latitude" : place.latitude,
-                               @"longitude" : place.longitude,
-                               @"types" : place.types,
-                               @"open" : place.open_now,
-                           }
+        [places addObject:[NSMutableDictionary dictionaryWithDictionary:@{
+                                @"id" : place.objectID,
+                                @"name" : place.name,
+                                @"address" : place.address,
+                                @"latitude" : place.latitude,
+                                @"longitude" : place.longitude,
+                                @"types" : place.types,
+                                @"open" : place.open_now,
+                               }
+                           ]
          ];
     }
     
     return [NSArray arrayWithArray:places];
 }
- 
+
+-(UIImage*)getImageForPlace:(NSString*)placeId {
+    NSArray *placeImages = [Icon MR_findByAttribute:@"placeId" withValue:placeId];
+    if (placeImages.count < 1) return nil;
+        
+    Icon *placeIcon = placeImages[0];
+    UIImage *placeImage = [UIImage imageWithData:placeIcon.icon];
+    
+    if (!placeImages) return nil;
+    return placeImage;
+}
+
+
 /*
  * Data Insert & Update
  */
@@ -71,8 +83,8 @@
     NSLog(@"types: %@", types);
      */
 }
--(void)saveNewPlace:(NSDictionary*)newPlace {
-        
+-(void)saveNewPlace:(NSDictionary*)newPlace
+{
     Place *place = [Place MR_createEntity];
     
     [place setName:newPlace[@"name"]];
@@ -81,6 +93,17 @@
     [place setLatitude:[NSNumber numberWithFloat:[newPlace[@"longitude"] floatValue]]];
     [place setOpen_now:[NSNumber numberWithInt:[newPlace[@"open"] intValue]]];
     [place setTypes:[newPlace[@"types"] description]];
+    
+    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+}
+
+-(void)saveImage:(UIImage*)image forPlace:(NSString*)placeName
+{
+    Icon *placeImage = [Icon MR_createEntity];
+    [placeImage setIcon:UIImagePNGRepresentation(image)];
+    
+    Place *imagePlace = [Place MR_findFirstByAttribute:@"name" withValue:placeName];
+    [imagePlace setIcon_rel:placeImage];
     
     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
 }

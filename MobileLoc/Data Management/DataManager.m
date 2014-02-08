@@ -43,6 +43,9 @@ static DataManager *sharedDataManager;
 -(NSArray*)getAllPlaces {
     return [dataStorage getAllPlaces];
 }
+-(UIImage*)getImageForPlace:(NSString*)placeId {
+    return [dataStorage getImageForPlace:placeId];
+}
 
 
 # pragma mark - PlaceFetcherDelegate
@@ -51,11 +54,23 @@ static DataManager *sharedDataManager;
     [dataStorage savePlaces:places];
     [[NSNotificationCenter defaultCenter] postNotificationName:GOT_NEW_PLACES
                                                         object:nil];
+    // Then proceed to fetch images
+    [placeFetcher fetchImagesForAllPlaces];
 }
 
 -(void)pfFailedToGetPlaces:(NSError *)error {
     [[NSNotificationCenter defaultCenter] postNotificationName:UNABLE_TO_FETCH_PLACES
                                                         object:@{ @"error" : error.description }];
+}
+
+-(void)pfGotImage:(UIImage *)image for:(NSString *)placeName {
+    [dataStorage saveImage:image forPlace:placeName];
+    [[NSNotificationCenter defaultCenter] postNotificationName:GOT_NEW_IMAGE
+                                                        object:Nil
+                                                      userInfo:@{
+                                                                 @"image" : image,
+                                                                 @"placeName" : placeName
+                                                                }];
 }
 
 -(void)pfTimedOut {
