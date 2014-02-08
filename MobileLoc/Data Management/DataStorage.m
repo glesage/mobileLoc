@@ -79,13 +79,18 @@
  */
 -(void)savePlaces:(NSArray*)places {
     
-    NSMutableArray *currentPlaces = [NSMutableArray array];
+    NSMutableDictionary *currentPlaces = [NSMutableDictionary dictionary];
     for (Place *place in [Place MR_findAll]) {
-        [currentPlaces addObject:place.name];
+        [currentPlaces setObject:place forKey:place.name];
     }
     for (NSDictionary *place in places) {
-        if ([currentPlaces containsObject:place[@"name"]]) continue;
-        [self saveNewPlace:place];
+        Place *prevPlace = [currentPlaces objectForKey:place[@"name"]];
+        
+        if (!prevPlace) [self saveNewPlace:place];
+        
+        else if (![prevPlace.open_now isEqualToNumber:place[@"open"]]) {
+            [prevPlace MR_deleteEntity];
+        }
     }
     
     /*
