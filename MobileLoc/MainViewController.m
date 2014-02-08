@@ -44,6 +44,8 @@
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
+    [toolbar setFrame:CGRectMake(160, 0, 320, 66)];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotNewPlaces) name:GOT_NEW_PLACES object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unableToFetchPlaces:) name:UNABLE_TO_FETCH_PLACES object:nil];
 }

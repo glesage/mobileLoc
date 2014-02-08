@@ -13,6 +13,7 @@
 @interface MainViewController : UIViewController <SettingsViewControllerDelegate, UITableViewDelegate, UITableViewDataSource>
 {
     IBOutlet __weak UITableView *placeTable;
+    IBOutlet UIToolbar *toolbar;
     NSMutableArray *places;
 }
 
