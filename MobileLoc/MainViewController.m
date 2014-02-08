@@ -73,9 +73,14 @@
 }
 
 
-#pragma mark - Settings View
+#pragma mark - Settings & Map Views
 
 - (void)settingsViewControllerDidFinish:(SettingsViewController *)controller
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)mapViewControllerDidFinish:(MapViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -85,7 +90,13 @@
     if ([[segue identifier] isEqualToString:@"showSettings"]) {
         [[segue destinationViewController] setDelegate:self];
     }
+    else if ([[segue identifier] isEqualToString:@"showMap"]) {
+        [[segue destinationViewController] setDelegate:self];
+        [(MapViewController*)[segue destinationViewController] setPlaces:[NSArray arrayWithArray:places]];
+    }
 }
+
+
 
 
 #pragma mark - TableView Delegate & Datasource

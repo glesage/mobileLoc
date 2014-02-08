@@ -113,7 +113,7 @@
     [place setName:newPlace[@"name"]];
     [place setAddress:newPlace[@"address"]];
     [place setLatitude:[NSNumber numberWithFloat:[newPlace[@"latitude"] floatValue]]];
-    [place setLatitude:[NSNumber numberWithFloat:[newPlace[@"longitude"] floatValue]]];
+    [place setLongitude:[NSNumber numberWithFloat:[newPlace[@"longitude"] floatValue]]];
     [place setOpen_now:[NSNumber numberWithInt:[newPlace[@"open"] intValue]]];
     [place setTypes:[newPlace[@"types"] description]];
     

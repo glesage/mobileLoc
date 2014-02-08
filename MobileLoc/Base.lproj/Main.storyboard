@@ -4,10 +4,56 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--Main View Controller-->
+        <!--Map View-->
+        <scene sceneID="bcs-ZF-4sy">
+            <objects>
+                <viewController id="1cr-p7-I92" userLabel="Map View" customClass="MapViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="VHJ-S1-ASM"/>
+                        <viewControllerLayoutGuide type="bottom" id="58Q-KC-pp4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5LD-0c-p5W">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P9Y-m0-Lsl">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="t3g-i6-qhc" userLabel="LSpacer"/>
+                                    <barButtonItem title="Map" id="KJI-Ji-zMK" userLabel="Title"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="aHV-6d-OKS" userLabel="RSpacer"/>
+                                    <barButtonItem image="x" style="plain" id="skH-hj-gO9" userLabel="X Button">
+                                        <connections>
+                                            <action selector="done:" destination="1cr-p7-I92" id="xHz-1o-eqM"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                                <color key="tintColor" red="0.13698645149999999" green="0.70863269100000004" blue="0.90816326530000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </toolbar>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.97999999999999998" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Avh-l3-YhI">
+                                <rect key="frame" x="16" y="80" width="289" height="477"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="1cr-p7-I92" id="3hm-qw-Jvh"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.13698645149999999" green="0.70863269100000004" blue="0.90816326530000002" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <connections>
+                        <outlet property="_mapView" destination="Avh-l3-YhI" id="jSV-rz-nLy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HFD-XZ-Lhe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="488" y="406"/>
+        </scene>
+        <!--Main View-->
         <scene sceneID="rV5-Y2-ghB">
             <objects>
-                <viewController id="rQl-PL-IFJ" customClass="MainViewController" sceneMemberID="viewController">
+                <viewController id="rQl-PL-IFJ" userLabel="Main View" customClass="MainViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FW7-yB-Igr"/>
                         <viewControllerLayoutGuide type="bottom" id="1FT-ha-6t5"/>
@@ -110,6 +156,9 @@
                                 <items>
                                     <barButtonItem image="Map" style="plain" id="brJ-Zt-0hq">
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <segue destination="1cr-p7-I92" kind="modal" identifier="showMap" id="540-Mf-Vkz"/>
+                                        </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="M09-lH-EqY"/>
                                     <barButtonItem title="Locations" id="ST5-h1-4Ku">
@@ -139,10 +188,10 @@
             </objects>
             <point key="canvasLocation" x="-54" y="197"/>
         </scene>
-        <!--Settings View Controller-->
+        <!--Settings View-->
         <scene sceneID="z9J-Vg-hzE">
             <objects>
-                <viewController id="kIf-nA-PKG" customClass="SettingsViewController" sceneMemberID="viewController">
+                <viewController id="kIf-nA-PKG" userLabel="Settings View" customClass="SettingsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vn5-Vv-K54"/>
                         <viewControllerLayoutGuide type="bottom" id="ecI-UZ-tNp"/>
@@ -156,10 +205,10 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="yNZ-tx-ieC"/>
-                                    <barButtonItem title="Settings" id="P5N-zc-zHx"/>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="04T-rP-kXA"/>
-                                    <barButtonItem image="x" style="plain" id="Qvh-LQ-bnN">
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="yNZ-tx-ieC" userLabel="LSpacer"/>
+                                    <barButtonItem title="Settings" id="P5N-zc-zHx" userLabel="Title"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="04T-rP-kXA" userLabel="RSpacer"/>
+                                    <barButtonItem image="x" style="plain" id="Qvh-LQ-bnN" userLabel="X Button">
                                         <connections>
                                             <action selector="done:" destination="kIf-nA-PKG" id="kSv-TB-pdr"/>
                                         </connections>
@@ -167,6 +216,73 @@
                                 </items>
                                 <color key="tintColor" red="0.13698645149999999" green="0.70863269100000004" blue="0.90816326530000002" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="500" minValue="0.0" maxValue="1000" translatesAutoresizingMaskIntoConstraints="NO" id="h6R-ae-Ezh" userLabel="Distance Slider">
+                                <rect key="frame" x="18" y="147" width="284" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="minimumTrackTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </slider>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Maximum distance:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dxb-eF-oU5" userLabel="Distance Label">
+                                <rect key="frame" x="50" y="118" width="151" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="500" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jhl-RD-Ulq" userLabel="Distance">
+                                <rect key="frame" x="211" y="118" width="59" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Open only" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uro-pb-kWl" userLabel="Open Label">
+                                <rect key="frame" x="62" y="229" width="104" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fHX-F4-zki" userLabel="Open Switch">
+                                <rect key="frame" x="179" y="224" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="onTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </switch>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Google Places" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fiy-f0-hot" userLabel="Google Label">
+                                <rect key="frame" x="57" y="322" width="112" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fBg-eF-068" userLabel="Google Switch">
+                                <rect key="frame" x="179" y="317" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="onTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </switch>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Foursquare" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zuz-Fj-9T3" userLabel="Foursquare Label">
+                                <rect key="frame" x="57" y="369" width="112" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Rm-4s-X56" userLabel="Foursquare Switch">
+                                <rect key="frame" x="179" y="364" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="onTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </switch>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Yelp" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pWd-p9-QFq" userLabel="Yelp Label">
+                                <rect key="frame" x="57" y="420" width="112" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1gA-8a-r7Y" userLabel="Yelp Switch">
+                                <rect key="frame" x="179" y="415" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="onTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" red="0.13698645149999999" green="0.70863269100000004" blue="0.90816326530000002" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -174,7 +290,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xlJ-1o-FvB" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="368" y="182"/>
+            <point key="canvasLocation" x="488" y="-294"/>
         </scene>
     </scenes>
     <resources>
