@@ -110,6 +110,13 @@
     NSDictionary *placeData = [places objectAtIndex:indexPath.row];
     [cell.nameLabel setText:placeData[@"name"]];
     
+    if (placeData[@"open"]) {
+        [cell.openLabel setText:@"OPEN"];
+        [cell.openLabel setTextColor:[UIColor colorWithRed:0.373 green:0.698 blue:0.255 alpha:0.9]];
+    }
+    
+    
+    // Types business
     NSArray *types = [placeData[@"types"] componentsSeparatedByString:@","];
     NSString *type = [self getFormattedType:types[0]];
     

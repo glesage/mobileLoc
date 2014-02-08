@@ -41,6 +41,7 @@
                                @"latitude" : place.latitude,
                                @"longitude" : place.longitude,
                                @"types" : place.types,
+                               @"open" : place.open_now,
                            }
          ];
     }
