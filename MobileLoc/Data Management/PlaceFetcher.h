@@ -11,7 +11,7 @@
 #import "GooglePlaces.h"
 
 @protocol PlaceFetcherDelegate
-- (void)pfGotAllPlaces:(NSDictionary*)places;
+- (void)pfGotAllPlaces:(NSArray*)places;
 - (void)pfFailedToGetPlaces:(NSError*)error;
 - (void)pfTimedOut;
 
@@ -23,7 +23,7 @@
     
     NSTimer *timeOutTimer;
     
-    NSMutableDictionary *allPlaces;
+    NSMutableArray *allPlaces;
 }
 
 @property (weak, nonatomic) id <PlaceFetcherDelegate> delegate;

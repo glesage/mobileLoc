@@ -10,7 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 
 @protocol GooglePlacesDelegate
-- (void)gpGotPlaces:(NSDictionary*)places;
+- (void)gpGotPlaces:(NSArray*)places;
 - (void)gpFailedToGetPlaces:(NSError*)error;
 
 @end
