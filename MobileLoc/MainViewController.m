@@ -115,13 +115,13 @@
         [cell.openLabel setTextColor:[UIColor colorWithRed:0.373 green:0.698 blue:0.255 alpha:0.9]];
     }
     
-    
     // Types business
     NSArray *types = [placeData[@"types"] componentsSeparatedByString:@","];
     NSString *type = [self getFormattedType:types[0]];
     
     [cell.typeLabel setText:type];
-    [cell.typeIcon setImage:[self imageForType:types[0]]];
+    UIImage *imgForType = [self imageForType:types[0]];
+    if (imgForType) [cell.typeIcon setImage:imgForType];
     
     [cell.type2Icon setHidden:YES];
     [cell.type3Icon setHidden:YES];
@@ -143,7 +143,8 @@
         
         // Show the second type icon
         [cell.type2Icon setHidden:NO];
-        [cell.type2Icon setImage:[self imageForType:types[1]]];
+        UIImage *imgForType = [self imageForType:types[1]];
+        if (imgForType) [cell.type2Icon setImage:imgForType];
         
         // Append this second type to the label
         NSString *secondType = [self getFormattedType:types[1]];
@@ -162,7 +163,8 @@
             
             // Show the third type icon
             [cell.type3Icon setHidden:NO];
-            [cell.type3Icon setImage:[self imageForType:types[2]]];
+            UIImage *imgForType = [self imageForType:types[2]];
+            if (imgForType) [cell.type3Icon setImage:imgForType];
             
             // Append this third type to the label
             NSString *thirdType = [self getFormattedType:types[2]];
@@ -175,6 +177,7 @@
     
     return cell;
 }
+// UTILITIES for CELL CREATION //
 -(UIImage*)imageForType:(NSString*)type {
     return [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", type]];
 }
@@ -185,6 +188,7 @@
                                            withString:@" "];
     return type;
 }
+// END UTILITIES //
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
