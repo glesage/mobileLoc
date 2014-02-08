@@ -17,7 +17,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        allPlaces = [[NSMutableDictionary alloc] init];
+        allPlaces = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -57,9 +57,9 @@
  * Checks if all third parties have returned places
  * If so, it returns all the places to the delegate
  */
--(void)gotMorePlaces:(NSDictionary*)places {
+-(void)gotMorePlaces:(NSArray*)places {
     @synchronized(allPlaces) {
-        [allPlaces addEntriesFromDictionary:places];
+        [allPlaces addObjectsFromArray:places];
     }
     
     if (gotGP) //Once all third parties have responded, proceed
@@ -74,7 +74,7 @@
 
 # pragma mark - GooglePlacesDelegate
 
--(void)gpGotPlaces:(NSDictionary *)places {
+-(void)gpGotPlaces:(NSArray *)places {
     gotGP = YES;
     NSLog(@"Got Google places");
     [self gotMorePlaces:places];}

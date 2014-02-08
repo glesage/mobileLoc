@@ -10,10 +10,12 @@
 
 #import <CoreData/CoreData.h>
 
-@interface MainViewController : UIViewController <SettingsViewControllerDelegate, UITableViewDelegate, UITableViewDataSource> {
-    IBOutlet UITableView *placeTable;
+@interface MainViewController : UIViewController <SettingsViewControllerDelegate, UITableViewDelegate, UITableViewDataSource>
+{
+    IBOutlet __weak UITableView *placeTable;
+    NSMutableArray *places;
 }
 
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (weak, nonatomic) IBOutlet UITableView *placeTable;
 
 @end

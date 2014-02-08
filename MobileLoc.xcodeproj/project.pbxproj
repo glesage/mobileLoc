@@ -10,6 +10,7 @@
 		369981D718A5556700069F6D /* DataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 369981D618A5556700069F6D /* DataStorage.m */; };
 		369981E718A5B2EA00069F6D /* Icon.m in Sources */ = {isa = PBXBuildFile; fileRef = 369981E618A5B2EA00069F6D /* Icon.m */; };
 		369981EA18A5B2EB00069F6D /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = 369981E918A5B2EB00069F6D /* Place.m */; };
+		369981ED18A6157000069F6D /* PlaceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 369981EC18A6157000069F6D /* PlaceCell.m */; };
 		36E195ED18A5156800190E84 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E195EC18A5156800190E84 /* Foundation.framework */; };
 		36E195EF18A5156800190E84 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E195EE18A5156800190E84 /* CoreGraphics.framework */; };
 		36E195F118A5156800190E84 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E195F018A5156800190E84 /* UIKit.framework */; };
@@ -54,6 +55,8 @@
 		369981E618A5B2EA00069F6D /* Icon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Icon.m; path = "Data Management/Core Data/Icon.m"; sourceTree = "<group>"; };
 		369981E818A5B2EB00069F6D /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Place.h; path = "Data Management/Core Data/Place.h"; sourceTree = "<group>"; };
 		369981E918A5B2EB00069F6D /* Place.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Place.m; path = "Data Management/Core Data/Place.m"; sourceTree = "<group>"; };
+		369981EB18A6157000069F6D /* PlaceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlaceCell.h; path = "Table Cells/PlaceCell.h"; sourceTree = "<group>"; };
+		369981EC18A6157000069F6D /* PlaceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlaceCell.m; path = "Table Cells/PlaceCell.m"; sourceTree = "<group>"; };
 		36E195E918A5156800190E84 /* mobileloc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mobileloc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36E195EC18A5156800190E84 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		36E195EE18A5156800190E84 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -128,6 +131,15 @@
 			name = "Core Data";
 			sourceTree = "<group>";
 		};
+		369981EE18A6157400069F6D /* Table Cells */ = {
+			isa = PBXGroup;
+			children = (
+				369981EB18A6157000069F6D /* PlaceCell.h */,
+				369981EC18A6157000069F6D /* PlaceCell.m */,
+			);
+			name = "Table Cells";
+			sourceTree = "<group>";
+		};
 		36E195E018A5156800190E84 = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +181,7 @@
 				36E195FE18A5156800190E84 /* AppDelegate.m */,
 				36E1960018A5156800190E84 /* Main.storyboard */,
 				36F4763618A53128007B9C1E /* Main Views */,
+				369981EE18A6157400069F6D /* Table Cells */,
 				36F4763C18A5481F007B9C1E /* Location Management */,
 				36FBBF5618A526C600462208 /* Data Management */,
 				36E1960C18A5156800190E84 /* Images.xcassets */,
@@ -391,6 +404,7 @@
 				36FBBF5918A5278400462208 /* DataManager.m in Sources */,
 				369981EA18A5B2EB00069F6D /* Place.m in Sources */,
 				36E195FF18A5156800190E84 /* AppDelegate.m in Sources */,
+				369981ED18A6157000069F6D /* PlaceCell.m in Sources */,
 				36F4763B18A5481B007B9C1E /* LocationManager.m in Sources */,
 				36E195FB18A5156800190E84 /* main.m in Sources */,
 				36FBBF5F18A5299300462208 /* PlaceFetcher.m in Sources */,

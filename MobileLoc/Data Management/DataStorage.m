@@ -30,11 +30,23 @@
 /*
  * Data Accessors
  */
-/*
--(NSFetchedResultsController*)fetchedResultsController {
-   
+-(NSArray*)getAllPlaces {
+    
+    
+    NSMutableArray *places = [NSMutableArray array];
+    for (Place *place in [Place MR_findAll]) {
+        [places addObject:@{
+                               @"name" : place.name,
+                               @"address" : place.address,
+                               @"latitude" : place.latitude,
+                               @"longitude" : place.longitude,
+                               @"types" : place.types,
+                           }
+         ];
+    }
+    
+    return [NSArray arrayWithArray:places];
 }
-*/
  
 /*
  * Data Insert & Update

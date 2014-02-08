@@ -11,5 +11,6 @@
 @interface DataStorage : NSObject <NSFetchedResultsControllerDelegate>
 
 -(void)savePlaces:(NSArray*)places;
+-(NSArray*)getAllPlaces;
 
 @end

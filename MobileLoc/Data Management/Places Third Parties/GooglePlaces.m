@@ -92,7 +92,7 @@ static NSString *const GPP_BASE_URL = @"https://maps.googleapis.com/maps/api/pla
                 [types appendFormat:@"%@,", [self trimWhiteSpaceFrom:type]];
             }
             
-            types = [[types substringFromIndex:1] substringToIndex:types.length-2];
+            types =  (NSMutableString*)[[types substringFromIndex:1] substringToIndex:types.length-2];
         }
         
         NSDictionary *finalPlace = @{

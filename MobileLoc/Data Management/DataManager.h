@@ -7,12 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "PlaceFetcher.h"
+#import "DataStorage.h"
+
+#define GOT_NEW_PLACES @"GNP_NOTIF"
+#define UNABLE_TO_FETCH_PLACES @"UTFP_NOTIF"
 
 @interface DataManager : NSObject <PlaceFetcherDelegate> {
     PlaceFetcher *placeFetcher;
+    DataStorage *dataStorage;
 }
 
 + (DataManager *)sharedManager;
+-(NSArray*)getAllPlaces;
 
 @end
