@@ -71,7 +71,8 @@
         if (![place isKindOfClass:[NSDictionary class]]) continue;
         
         // Formatting the type string
-        NSString *type = place[@"categories"][0][@"name"];
+        NSString *type = @"na";
+        if (place[@"categories"] && [place[@"categories"] count] > 0) type = place[@"categories"][0][@"name"];
         type = [type lowercaseString];
         type = [type stringByReplacingOccurrencesOfString:@" " withString:@"_"];
         

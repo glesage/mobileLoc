@@ -36,6 +36,14 @@ static LocationManager *sharedLocManager;
     return self;
 }
 
+// Fully check for location
+-(BOOL)locationEnabled {
+    BOOL locationAuthorized = ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized);
+    BOOL locationEnabled = [CLLocationManager locationServicesEnabled];
+    BOOL locationAvail = (locationManager.location != nil);
+    return (locationAuthorized && locationEnabled && locationAvail);
+}
+
 -(CLLocation*)getCurrentLocation {
     CLLocation *currentLocation = [[locationManager location] copy];
     return currentLocation;

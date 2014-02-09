@@ -44,34 +44,37 @@
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    if (!places || places.count < 1) [self gotNewPlaces];
+    //if (!places || places.count < 1) [self getAllPlaces];
+    [self getAllPlaces];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotNewPlaces) name:GOT_NEW_PLACES object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unableToFetchPlaces:) name:UNABLE_TO_FETCH_PLACES object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newPlacesFetched) name:GOT_NEW_PLACES object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotProblem:) name:DMGR_PROBLEM object:nil];
 }
 
 
 #pragma mark - Data Handlers
 
--(void)gotNewPlaces {
+-(void)newPlacesFetched
+{
+    [self getAllPlaces];
+}
+-(void)getAllPlaces
+{
     [places removeAllObjects];
     [places addObjectsFromArray:[[DataManager sharedManager] getAllPlaces]];
-    [placeTable setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+    
+    [self createTableCells];
     [placeTable reloadData];
 }
 
--(void)unableToFetchPlaces:(NSNotification*)notification {
+-(void)gotProblem:(NSNotification*)notification {
     
     if ([notification.userInfo objectForKey:@"message"]) {
-        [self alertWithTitle:@"Unable to fetch places"
+        [self alertWithTitle:@"Something went wrong..."
                   andMessage:[notification.userInfo objectForKey:@"message"]];
     }
-    else [self alertWithTitle:@"Unable to fetch places" andMessage:nil];
-    
-    if ([notification.userInfo objectForKey:@"error"]) {
-        NSString *error = [notification.userInfo objectForKey:@"error"];
-        NSLog(@"Failed to fetch places: %@", error);
-    }
+    else [self alertWithTitle:@"Something went wrong..."
+                   andMessage:@"We're sorry we don't have more details. Please restart the app when you can."];
 }
 
 
@@ -99,39 +102,41 @@
 }
 
 
-#pragma mark - TableView Delegate & Datasource
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return places.count;
-}
+#pragma mark - Place Cells business
 
 /*
  * Creates the cells to display
  *
  * Also handles the types label formatting and icons showing
  */
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)createTableCells
+{
+    NSMutableArray *tmpPlacesCells = [NSMutableArray arrayWithCapacity:places.count];
+    for (NSDictionary *place in places) {
+        [tmpPlacesCells addObject:[self createCellForPlace:place]];
+    }
+    placesCells = [[NSArray alloc] initWithArray:tmpPlacesCells];
+}
+-(PlaceCell*)createCellForPlace:(NSDictionary*)placeData
 {
     static NSString *CellIdentifier = @"placeTableCell";
-    
-    PlaceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"placeTableCell"];
+    PlaceCell *cell = [placeTable dequeueReusableCellWithIdentifier:@"placeTableCell"];
     if (!cell) {
         cell = [[PlaceCell alloc] initWithStyle:UITableViewCellStyleDefault
                                 reuseIdentifier:CellIdentifier];
     }
     [cell observeImageUpdates];
     
-    
     // Setup the Cell content
-    NSDictionary *placeData = [places objectAtIndex:indexPath.row];
     [cell.nameLabel setText:placeData[@"name"]];
     
     // Main Photo
     if (placeData[@"image"]) [cell setMainIcon:placeData[@"image"]];
-
+    
     // Open Status
     if ([placeData[@"source"] isEqualToString:@"foursquare"])
-         [cell.openLabel setText:@"-"];
+        [cell.openLabel setText:@"-"];
     else [cell setOpen:[placeData[@"open"] boolValue]];
     
     // Distance
@@ -192,9 +197,7 @@
             NSString *thirdType = [self getFormattedType:types[2]];
             [cell.typeLabel setText:[NSString stringWithFormat:@"%@, %@", cell.typeLabel.text, thirdType]];
         }
-        
     }
-    
     return cell;
 }
 // UTILITIES for CELL CREATION //
@@ -203,7 +206,7 @@
 }
 -(NSString*)getFormattedType:(NSString*)type {
     type = [type stringByReplacingCharactersInRange:NSMakeRange(0,1)
-                                            withString:[[type substringToIndex:1] uppercaseString]];
+                                         withString:[[type substringToIndex:1] uppercaseString]];
     type = [type stringByReplacingOccurrencesOfString:@"_"
                                            withString:@" "];
     return type;
@@ -221,6 +224,17 @@
     return [[LocationManager sharedManager] userFriendlyDistanceMiles:distance];
 }
 // END UTILITIES //
+
+
+#pragma mark - TableView Delegate & Datasource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return placesCells.count;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [placesCells objectAtIndex:indexPath.row];
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

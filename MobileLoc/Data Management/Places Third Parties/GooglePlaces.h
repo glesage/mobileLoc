@@ -13,7 +13,7 @@
 static NSString *const GP_BASE_URL = @"https://maps.googleapis.com/maps/api/place/nearbysearch/json";
 static NSString *const GPP_BASE_URL = @"https://maps.googleapis.com/maps/api/place/photo";
 
-#define GP_API_KEY @"AIzaSyCeABNGmxmHWXWt-0Jsq-lwzSJL7ZG_Omk"
+#define GP_API_KEY @"AIzaSyCtuWWbAibU_Qg8Bbq9udqHrNNE2FD4Ias"
 
 
 @protocol GooglePlacesDelegate

@@ -14,19 +14,23 @@
 
 @implementation SettingsViewController
 
+
+#pragma mark - View Management
+
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    if ([defaults objectForKey:@"open"])        [openSwitch setOn:[defaults boolForKey:@"open"]];
-    
-    if ([defaults objectForKey:@"distance"])    [distanceSlider setValue:[defaults floatForKey:@"distance"]];
-    if ([defaults objectForKey:@"distance"])    [distanceLabel setText:[NSString stringWithFormat:@"%d m",
-                                                                        [defaults integerForKey:@"distance"]]];
-    
-    if ([defaults objectForKey:@"no-google"])      [googleSwitch       setOn:![defaults boolForKey:@"no-google"]];
-    if ([defaults objectForKey:@"no-foursquare"])  [foursquareSwitch   setOn:![defaults boolForKey:@"no-fsq"]];
+    [self loadAllSettings];
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self saveAllSettings];
+}
+
+- (IBAction)done:(id)sender
+{
+    [self.delegate settingsViewControllerDidFinish:self];
+    [self saveAllSettings];
 }
 
 
@@ -40,26 +44,42 @@
     
 }
 - (IBAction)switchChanged:(UISwitch*)sender {
+    [self saveAllSettings];
+}
+
+/*
+ * This will save all settings based on the sate of the widgets
+ *
+ * Since there are only a few items, we can affort to do this very often
+ * So the settings will be saved no matter what
+ */
+-(void)saveAllSettings
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setInteger:(int)distanceSlider.value forKey:@"distance"];
+    
+    [defaults setBool:openSwitch.on         forKey:@"open"];
+    [defaults setBool:!googleSwitch.on      forKey:@"no-google"];
+    [defaults setBool:!foursquareSwitch.on  forKey:@"no-fsq"];
+    
+    [defaults synchronize];
+}
+
+/*
+ * Load all settings and set the widgets
+ */
+-(void)loadAllSettings
+{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    if (sender == openSwitch) {
-        if (sender.on)  [defaults setBool:YES forKey:@"open"];
-        else            [defaults setBool:NO forKey:@"open"];
-        return;
-    }
-    if (sender == googleSwitch){
-        if (sender.on)  [defaults setBool:NO forKey:@"no-google"];
-        else            [defaults setBool:YES forKey:@"no-google"];
-        return;
-    }
-    if (sender == foursquareSwitch){
-        if (sender.on)  [defaults setBool:NO forKey:@"no-fsq"];
-        else            [defaults setBool:YES forKey:@"no-fsq"];
-    }
-}
-- (IBAction)done:(id)sender
-{
-    [self.delegate settingsViewControllerDidFinish:self];
+    if ([defaults boolForKey:@"open"])        [openSwitch setOn:[defaults boolForKey:@"open"]];
+    
+    if ([defaults objectForKey:@"distance"])    [distanceSlider setValue:[defaults floatForKey:@"distance"]];
+    if ([defaults objectForKey:@"distance"])    [distanceLabel setText:[NSString stringWithFormat:@"%d m",
+                                                                        (int)[defaults integerForKey:@"distance"]]];
+    
+    if ([defaults boolForKey:@"no-google"])      [googleSwitch       setOn:![defaults boolForKey:@"no-google"]];
+    if ([defaults boolForKey:@"no-foursquare"])  [foursquareSwitch   setOn:![defaults boolForKey:@"no-fsq"]];
 }
 
 @end

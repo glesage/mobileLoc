@@ -22,6 +22,5 @@
 @property (weak, nonatomic) id <FoursquareImagesDelegate> delegate;
 
 -(id)initWithPlaces:(NSArray*)places;
--(void)cancelFetching;
 
 @end

@@ -30,13 +30,13 @@
     manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFImageResponseSerializer serializer];
     
-    for (NSDictionary *place in places) {
-        
+    for (NSDictionary *place in places)
+    {
         if (!place[@"icon"] || [place[@"icon"] isEqualToString:@"-"]) continue;
+        if (![place[@"source"] isEqualToString:@"foursquare"]) continue;
         [self fetchImageForPlace:place];
     }
 }
-
 
 /*
  * Queries Foursquare for the photo image of a given place
@@ -64,21 +64,25 @@
                                            [self.delegate fsqiGotImage:responseObject for:place[@"name"]];
                                        }
                                        failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                           [self.delegate fsqiFailedToGetImage:error];
+                                           [self.delegate fsqiFailedToGetImage:[NSError errorWithDomain:@"com.gl.mobileloc" code:7
+                                                                                               userInfo:@{
+                                                                                                          @"message" : @"Could not get Foursquare images",
+                                                                                                          @"error": error
+                                                                                                          }
+                                                                                ]
+                                            ];
                                        }];
                                   
                               } else {
                                   [self.delegate fsqiFailedToGetImage:[NSError errorWithDomain:@"com.gl.mobileloc" code:7
-                                                                                      userInfo:@{@"error" : @"Foursquare failed"}
+                                                                                      userInfo:@{
+                                                                                                 @"message" : @"Could not get Foursquare images",
+                                                                                                 @"error": result
+                                                                                                 }
                                                                        ]
                                    ];
                               }
                           }];
 }
-
--(void)cancelFetching {
-    //Does nothing
-}
-
 
 @end

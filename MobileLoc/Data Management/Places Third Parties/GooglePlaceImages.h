@@ -21,6 +21,5 @@
 @property (weak, nonatomic) id <GooglePlaceImagesDelegate> delegate;
 
 -(id)initWithPlaces:(NSArray*)places;
--(void)cancelFetching;
 
 @end

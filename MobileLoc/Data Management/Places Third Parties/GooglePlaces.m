@@ -33,7 +33,8 @@
     int radius = 500;
     if ([defaults objectForKey:@"distance"]) radius = [[defaults objectForKey:@"distance"] intValue];
     
-    //also "open now" parameter
+    NSNumber *openNow = @NO;
+    if ([defaults boolForKey:@"open"]) openNow = [NSNumber numberWithBool:[defaults boolForKey:@"open"]];
     
     [manager GET:[[NSURL URLWithString:GP_BASE_URL] absoluteString]
       parameters:@{
@@ -41,14 +42,21 @@
                        @"location": coordinatesParam,
                        @"radius": [NSNumber numberWithInt:radius],
                        @"sensor": @"true",
-                       @"language": @"en"
+                       @"language": @"en",
+                       @"opennow": openNow
                    }
          success:^(NSURLSessionDataTask *task, id responseObject) {
              NSDictionary *rawPlaces = (NSDictionary*)responseObject;
              [self.delegate gpGotPlaces:[self checkAndFormatPlaces:rawPlaces[@"results"]]];
          }
          failure:^(NSURLSessionDataTask *task, NSError *error) {
-             [self.delegate gpFailedToGetPlaces:error];
+             [self.delegate gpFailedToGetPlaces:[NSError errorWithDomain:@"com.gl.mobileloc" code:6
+                                                                userInfo:@{
+                                                                           @"message" : @"Could not get Google Places",
+                                                                           @"error": error
+                                                                           }
+                                                 ]
+              ];
          }];
 }
 

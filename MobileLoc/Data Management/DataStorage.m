@@ -30,9 +30,11 @@
 /*
  * Data Accessors
  */
--(NSArray*)getAllPlaces {
+-(NSArray*)getAllPlaces
+{
     NSMutableArray *places = [NSMutableArray array];
-    for (Place *place in [Place MR_findAll]) {
+    for (Place *place in [Place MR_findAll])
+    {        
         NSDictionary *placeDict;
         if (place.icon_rel) {
             Icon *placeImage = place.icon_rel;

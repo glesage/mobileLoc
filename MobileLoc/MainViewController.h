@@ -16,6 +16,7 @@
     IBOutlet __weak UITableView *placeTable;
     IBOutlet UIToolbar *toolbar;
     NSMutableArray *places;
+    NSArray *placesCells;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *placeTable;

@@ -15,7 +15,6 @@
 
 @synthesize nameLabel;
 @synthesize icon;
-@synthesize imageLoad;
 
 
 -(void)observeImageUpdates {
@@ -39,9 +38,9 @@
     icon.clipsToBounds = YES;
     
     [icon setImage:image];
-    [imageLoad stopAnimating];
 }
--(void)gotNewImage:(NSNotification*)notification {
+-(void)gotNewImage:(NSNotification*)notification
+{    
     if (![notification.userInfo objectForKey:@"image"]) return;
     if (![notification.userInfo objectForKey:@"placeName"]) return;
     

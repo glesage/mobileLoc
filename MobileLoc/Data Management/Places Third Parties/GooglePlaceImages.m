@@ -21,9 +21,10 @@
     manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFImageResponseSerializer serializer];
     
-    for (NSDictionary *place in places) {
-        
+    for (NSDictionary *place in places)
+    {
         if (!place[@"icon"] || [place[@"icon"] isEqualToString:@"-"]) continue;
+        if (![place[@"source"] isEqualToString:@"google"]) continue;
         [self fetchImageForPlace:place];
     }
 }
@@ -45,12 +46,14 @@
              [self.delegate gpiGotImage:responseObject for:place[@"name"]];
          }
          failure:^(NSURLSessionDataTask *task, NSError *error) {
-             [self.delegate gpiFailedToGetImage:error];
+             [self.delegate gpiFailedToGetImage:[NSError errorWithDomain:@"com.gl.mobileloc" code:6
+                                                                userInfo:@{
+                                                                           @"message" : @"Could not get Google images",
+                                                                           @"error": error
+                                                                           }
+                                                 ]
+              ];
          }];
-}
-
--(void)cancelFetching {
-    [[manager operationQueue] cancelAllOperations];
 }
 
 @end

@@ -32,10 +32,34 @@ static DataManager *sharedDataManager;
         
         placeFetcher = [[PlaceFetcher alloc] init];
         [placeFetcher setDelegate:self];
-
-        [placeFetcher fetchPlacesAround:[[LocationManager sharedManager] getCurrentLocation]];
+        
+        repeatCounter = 0;
+        [self fetchNearPlaces];
     }
     return self;
+}
+
+/*
+ * Attempt to launch place fetching
+ *
+ * Checks for location services before for TIMEOUT_REPEATS number of times
+ * If location is not enabled after this timer then STOP
+ */
+-(void)fetchNearPlaces {
+    if (repeatCounter > TIMEOUT_REPEATS) {
+        [self pfFailedToGetPlaces:[NSError errorWithDomain:@"com.gl.mobileloc"
+                                                      code:1
+                                                  userInfo:@{@"error" : @"Location services disabled"}]
+         ];
+        repeatCounter = 0;
+        return;
+    }
+    if (![[LocationManager sharedManager] locationEnabled]) {
+        repeatCounter++;
+        [self performSelector:@selector(fetchNearPlaces) withObject:nil afterDelay:1];
+        return;
+    }
+    [placeFetcher fetchPlacesAround:[[LocationManager sharedManager] getCurrentLocation]];
 }
 
 -(NSArray*)getAllPlaces {
@@ -47,18 +71,29 @@ static DataManager *sharedDataManager;
 
 -(void)pfGotAllPlaces:(NSArray *)places
 {
-    if (![dataStorage savePlaces:places]) return; // If no new places have been saved, no need to change the UI!
+    // If no new places have been saved, no need to change anything,
+    // and especially no need to fetch new images!
+    if (![dataStorage savePlaces:places]) return;
     
     // Otherwise, inform the world that we've got news
-    [[NSNotificationCenter defaultCenter] postNotificationName:GOT_NEW_PLACES
-                                                        object:nil];
-    // Then proceed to fetch images
-    [placeFetcher fetchImagesForAllPlaces];
+    [[NSNotificationCenter defaultCenter] postNotificationName:GOT_NEW_PLACES object:nil];
+    
+    // Then proceed to fetch images (after a short delay to let the UI rest)
+    [placeFetcher performSelector:@selector(fetchImagesForAllPlaces) withObject:nil afterDelay:0.1];
 }
 
--(void)pfFailedToGetPlaces:(NSError *)error {
-    [[NSNotificationCenter defaultCenter] postNotificationName:UNABLE_TO_FETCH_PLACES
-                                                        object:@{ @"error" : error.description }];
+-(void)notifyDelegateOfProblem:(NSString*)message
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:DMGR_PROBLEM
+                                                        object:@{ @"message" : message }];
+}
+-(void)pfFailedToGetPlaces:(NSString *)message
+{
+    [self notifyDelegateOfProblem:message];
+}
+-(void)pfFailedToGetImage:(NSString *)message
+{
+    [self notifyDelegateOfProblem:message];
 }
 
 -(void)pfGotImage:(UIImage *)image for:(NSString *)placeName {
@@ -71,9 +106,9 @@ static DataManager *sharedDataManager;
                                                                 }];
 }
 
--(void)pfTimedOut {
-    [[NSNotificationCenter defaultCenter] postNotificationName:UNABLE_TO_FETCH_PLACES
-                                                        object:@{ @"message" : @"Took too long to fetch places :(" }];
+-(void)pfTimedOut
+{
+    [self notifyDelegateOfProblem:@"Took too long to fetch places :("];
 }
 
 @end
