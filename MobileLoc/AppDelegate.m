@@ -10,13 +10,16 @@
 
 #import "MainViewController.h"
 
-#import <Foursquare2.h>
-
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {    
     [MagicalRecord setupAutoMigratingCoreDataStack];
+    
+    // Set the default provider if no settings are found
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults objectForKey:@"provider"]) [defaults setObject:@"google" forKey:@"provider"];
+    
     return YES;
 }
 							
@@ -40,16 +43,13 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"APP_DID_BECOME_ACTIVE" object:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Saves changes in the application's managed object context before the application terminates.
     [[NSNotificationCenter defaultCenter] postNotificationName:@"APP_WILL_TERMINATE_NOTIF" object:nil];    
-}
-
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    return [Foursquare2 handleURL:url];
 }
 
 

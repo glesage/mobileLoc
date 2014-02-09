@@ -17,6 +17,9 @@
     IBOutlet UIToolbar *toolbar;
     NSMutableArray *places;
     NSArray *placesCells;
+    
+    NSTimer *notificationTimer;
+    BOOL dontNotifyYet;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *placeTable;

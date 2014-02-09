@@ -49,7 +49,10 @@
                                           [self.delegate fsqGotPlaces:places];
                                       } else {
                                           [self.delegate fsqFailedToGetPlaces:[NSError errorWithDomain:@"com.gl.mobileloc" code:7
-                                                                                              userInfo:@{@"error" : @"Foursquare failed"}
+                                                                                              userInfo:@{
+                                                                                                         @"message" :@"Could not get Foursquare places",
+                                                                                                         @"error" : result
+                                                                                                         }
                                                                                ]
                                            ];
                                       }

@@ -41,8 +41,8 @@
     
      NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    BOOL use_GOOGLE = ![defaults boolForKey:@"no-google"];
-    BOOL use_FOURSQUARE = ![defaults boolForKey:@"no-fsq"];
+    BOOL use_GOOGLE = [[defaults objectForKey:@"provider"] isEqualToString:@"google"];
+    BOOL use_FOURSQUARE = [[defaults objectForKey:@"provider"] isEqualToString:@"foursquare"];
     
      if (use_GOOGLE) {
          googlePlaces = [[GooglePlaces alloc] initWithLocation:location];
@@ -71,6 +71,8 @@
  */
 -(void)reachedTimeout
 {
+    [timeOutTimer invalidate];
+    
     [googlePlaces cancelFetching];
     [fsq cancelFetching];
     
@@ -91,9 +93,7 @@
     
     if (gotGP && gotFSQ) //Once all third parties have responded, proceed
     {
-        [timeOutTimer invalidate];
-        timeOutTimer = nil;
-        
+        [timeOutTimer invalidate];        
         [self.delegate pfGotAllPlaces:allPlaces];
     }
 }
@@ -107,8 +107,8 @@
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    BOOL use_GOOGLE = ![defaults boolForKey:@"no-google"];
-    BOOL use_FOURSQUARE = ![defaults boolForKey:@"no-fsq"];
+    BOOL use_GOOGLE = [[defaults objectForKey:@"provider"] isEqualToString:@"google"];
+    BOOL use_FOURSQUARE = [[defaults objectForKey:@"provider"] isEqualToString:@"foursquare"];
     
     if (use_GOOGLE) {
         [self fetchGPIForPlaces:allPlaces];
@@ -171,7 +171,7 @@
 }
 -(void)gpiFailedToGetImage:(NSError *)error
 {
-    if (!notifiedForImage) [self.delegate pfFailedToGetPlaces:error.userInfo[@"message"]];
+    if (!notifiedForImage) [self.delegate pfFailedToGetImage:error.userInfo[@"message"]];
     notifiedForImage = YES;
     NSLog(@"Failed to get Google Place Image - %@", error.description);
 }

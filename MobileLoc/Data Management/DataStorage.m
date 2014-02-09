@@ -32,9 +32,19 @@
  */
 -(NSArray*)getAllPlaces
 {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSMutableArray *places = [NSMutableArray array];
     for (Place *place in [Place MR_findAll])
-    {        
+    {
+        // Check if the place is part of the user accepted source
+        if (![place.source isEqualToString:[defaults objectForKey:@"provider"]]) {
+            // If not then delete it altogether
+            [place MR_deleteEntity];
+            
+            // And proceed to the next
+            continue;
+        }
+        
         NSDictionary *placeDict;
         if (place.icon_rel) {
             Icon *placeImage = place.icon_rel;
@@ -70,19 +80,33 @@
 /*
  * Data Insert & Update
  */
--(BOOL)savePlaces:(NSArray*)places {
+-(BOOL)savePlaces:(NSArray*)places
+{
+    
+    NSDictionary *namesAndSources = [self getNamesAndSourcesForPlaces:places];
     
     NSMutableDictionary *currentPlaces = [NSMutableDictionary dictionary];
-    for (Place *place in [Place MR_findAll]) {
+    for (Place *place in [Place MR_findAll])
+    {
+        // Delete the old place if it is not part of the new list (and was from the same source)
+        if ([namesAndSources[place.name] isEqualToString:place.source] &&
+            ![namesAndSources.allKeys containsObject:place.name])
+        {
+            [place MR_deleteEntity];
+            continue;
+        }
+        
+        // Otherwise add it to the current places list
         [currentPlaces setObject:place forKey:place.name];
     }
+    
     
     BOOL savedATLeastOne = NO;
     
     for (NSDictionary *place in places) {
         Place *prevPlace = [currentPlaces objectForKey:place[@"name"]];
         
-        if (!prevPlace) {
+        if (!prevPlace || !prevPlace.entity) {
             [self saveNewPlace:place];
             savedATLeastOne = YES;
         }
@@ -94,6 +118,15 @@
         }
     }
     return savedATLeastOne;
+}
+-(NSDictionary*)getNamesAndSourcesForPlaces:(NSArray*)places
+{
+    NSMutableDictionary *tmpDict = [NSMutableDictionary dictionaryWithCapacity:places.count];
+    for (NSDictionary *place in places)
+    {
+        [tmpDict setObject:place[@"source"] forKey:place[@"name"]];
+    }
+    return [NSDictionary dictionaryWithDictionary:tmpDict];
 }
 -(void)saveNewPlace:(NSDictionary*)newPlace
 {

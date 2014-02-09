@@ -25,6 +25,8 @@
 }
 
 + (DataManager *)sharedManager;
+    
+-(void)fetchNearPlaces;
 -(NSArray*)getAllPlaces;
 
 @end

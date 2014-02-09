@@ -47,10 +47,7 @@ static DataManager *sharedDataManager;
  */
 -(void)fetchNearPlaces {
     if (repeatCounter > TIMEOUT_REPEATS) {
-        [self pfFailedToGetPlaces:[NSError errorWithDomain:@"com.gl.mobileloc"
-                                                      code:1
-                                                  userInfo:@{@"error" : @"Location services disabled"}]
-         ];
+        [self notifyDelegateOfProblem:@"Location services are disabled or invalid"];
         repeatCounter = 0;
         return;
     }
@@ -62,8 +59,17 @@ static DataManager *sharedDataManager;
     [placeFetcher fetchPlacesAround:[[LocationManager sharedManager] getCurrentLocation]];
 }
 
+/*
+ * Asks the dataStorage for all the places
+ * If none are found, then fetch some and return an empty array
+ */
 -(NSArray*)getAllPlaces {
-    return [dataStorage getAllPlaces];
+    NSArray *allThePlaces = [dataStorage getAllPlaces];
+    
+    if (allThePlaces.count > 0) return allThePlaces;
+    else [self fetchNearPlaces];
+    
+    return [NSArray array];
 }
 
 
@@ -84,8 +90,9 @@ static DataManager *sharedDataManager;
 
 -(void)notifyDelegateOfProblem:(NSString*)message
 {
+    NSDictionary *userInfo = @{ @"message" : message };
     [[NSNotificationCenter defaultCenter] postNotificationName:DMGR_PROBLEM
-                                                        object:@{ @"message" : message }];
+                                                        object:userInfo];
 }
 -(void)pfFailedToGetPlaces:(NSString *)message
 {
@@ -108,7 +115,12 @@ static DataManager *sharedDataManager;
 
 -(void)pfTimedOut
 {
-    [self notifyDelegateOfProblem:@"Took too long to fetch places :("];
+    [self notifyDelegateOfProblem:[NSError errorWithDomain:@"com.gl.mobileloc" code:2
+                                                  userInfo:@{
+                                                             @"message" : @"Took too long to fetch places :("
+                                                             }
+                                   ]
+     ];
 }
 
 @end

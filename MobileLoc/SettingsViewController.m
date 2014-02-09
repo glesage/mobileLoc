@@ -43,7 +43,7 @@
     [distanceLabel setText:[NSString stringWithFormat:@"%.0f m", distanceSlider.value]];
     
 }
-- (IBAction)switchChanged:(UISwitch*)sender {
+- (IBAction)providerChanged:(id)sender {
     [self saveAllSettings];
 }
 
@@ -59,8 +59,8 @@
     [defaults setInteger:(int)distanceSlider.value forKey:@"distance"];
     
     [defaults setBool:openSwitch.on         forKey:@"open"];
-    [defaults setBool:!googleSwitch.on      forKey:@"no-google"];
-    [defaults setBool:!foursquareSwitch.on  forKey:@"no-fsq"];
+    if (providerSC.selectedSegmentIndex == 0)   [defaults setObject:@"google" forKey:@"provider"];
+    else                                        [defaults setObject:@"foursquare" forKey:@"provider"];
     
     [defaults synchronize];
 }
@@ -77,9 +77,9 @@
     if ([defaults objectForKey:@"distance"])    [distanceSlider setValue:[defaults floatForKey:@"distance"]];
     if ([defaults objectForKey:@"distance"])    [distanceLabel setText:[NSString stringWithFormat:@"%d m",
                                                                         (int)[defaults integerForKey:@"distance"]]];
-    
-    if ([defaults boolForKey:@"no-google"])      [googleSwitch       setOn:![defaults boolForKey:@"no-google"]];
-    if ([defaults boolForKey:@"no-foursquare"])  [foursquareSwitch   setOn:![defaults boolForKey:@"no-fsq"]];
+    if ([[defaults objectForKey:@"provider"] isEqualToString:@"google"])
+         [providerSC setSelectedSegmentIndex:0];
+    else [providerSC setSelectedSegmentIndex:1];
 }
 
 @end

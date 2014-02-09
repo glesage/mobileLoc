@@ -243,50 +243,40 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Open only" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uro-pb-kWl" userLabel="Open Label">
-                                <rect key="frame" x="62" y="254" width="104" height="21"/>
+                                <rect key="frame" x="62" y="258" width="104" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fHX-F4-zki" userLabel="Open Switch">
-                                <rect key="frame" x="179" y="249" width="51" height="31"/>
+                                <rect key="frame" x="179" y="253" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="onTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <action selector="switchChanged:" destination="kIf-nA-PKG" eventType="valueChanged" id="kUO-KT-zz7"/>
                                 </connections>
                             </switch>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Google Places" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fiy-f0-hot" userLabel="Google Label">
-                                <rect key="frame" x="57" y="358" width="112" height="21"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="OY7-5P-pJb" userLabel="Provider Selection">
+                                <rect key="frame" x="59" y="359" width="202" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fBg-eF-068" userLabel="Google Switch">
-                                <rect key="frame" x="179" y="353" width="51" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="onTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <segments>
+                                    <segment title="Google"/>
+                                    <segment title="Foursquare"/>
+                                </segments>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <action selector="switchChanged:" destination="kIf-nA-PKG" eventType="valueChanged" id="ibl-vh-vFl"/>
+                                    <action selector="providerChanged:" destination="kIf-nA-PKG" eventType="valueChanged" id="LTB-Kz-k00"/>
                                 </connections>
-                            </switch>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Foursquare" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zuz-Fj-9T3" userLabel="Foursquare Label">
-                                <rect key="frame" x="57" y="405" width="112" height="21"/>
+                            </segmentedControl>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Foursquare" translatesAutoresizingMaskIntoConstraints="NO" id="zAA-rs-Guw">
+                                <rect key="frame" x="271" y="359" width="29" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Rm-4s-X56" userLabel="Foursquare Switch">
-                                <rect key="frame" x="179" y="400" width="51" height="31"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Google" translatesAutoresizingMaskIntoConstraints="NO" id="8ZY-2P-IJa">
+                                <rect key="frame" x="20" y="359" width="29" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="onTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <action selector="switchChanged:" destination="kIf-nA-PKG" eventType="valueChanged" id="kCz-14-vrF"/>
-                                </connections>
-                            </switch>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.13698645149999999" green="0.70863269100000004" blue="0.90816326530000002" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -294,9 +284,8 @@
                     <connections>
                         <outlet property="distanceLabel" destination="jhl-RD-Ulq" id="IPJ-Hl-HrQ"/>
                         <outlet property="distanceSlider" destination="h6R-ae-Ezh" id="E15-Vd-ysY"/>
-                        <outlet property="foursquareSwitch" destination="0Rm-4s-X56" id="bpr-MX-oEi"/>
-                        <outlet property="googleSwitch" destination="fBg-eF-068" id="VNF-DX-djh"/>
                         <outlet property="openSwitch" destination="fHX-F4-zki" id="ExK-qX-owz"/>
+                        <outlet property="providerSC" destination="OY7-5P-pJb" id="DTt-lb-C9A"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xlJ-1o-FvB" sceneMemberID="firstResponder"/>
@@ -306,6 +295,8 @@
     </scenes>
     <resources>
         <image name="Belly" width="128" height="128"/>
+        <image name="Foursquare" width="58" height="58"/>
+        <image name="Google" width="58" height="58"/>
         <image name="Map" width="44" height="66"/>
         <image name="Settings" width="44" height="66"/>
         <image name="TableCellArrow" width="50" height="50"/>
