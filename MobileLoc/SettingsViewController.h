@@ -27,7 +27,7 @@
 @property (weak, nonatomic) id <SettingsViewControllerDelegate> delegate;
 
 - (IBAction)distanceSliderChanged:(id)sender;
-- (IBAction)providerChanged:(id)sender;
+- (IBAction)selectionMade:(id)sender;
 - (IBAction)done:(id)sender;
 
 @end

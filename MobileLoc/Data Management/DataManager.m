@@ -25,6 +25,12 @@ static DataManager *sharedDataManager;
     return sharedDataManager;
 }
 
+/*
+ * Instanciate class
+ * Instanciate main containers
+ * Reset the repeat counter
+ * check to fetch new places
+ */
 - (id)init {
     self = [super init];
     if (self) {
@@ -88,11 +94,11 @@ static DataManager *sharedDataManager;
     [placeFetcher performSelector:@selector(fetchImagesForAllPlaces) withObject:nil afterDelay:0.1];
 }
 
+// Sends a Notification to all with the related error/problem message
 -(void)notifyDelegateOfProblem:(NSString*)message
 {
-    NSDictionary *userInfo = @{ @"message" : message };
     [[NSNotificationCenter defaultCenter] postNotificationName:DMGR_PROBLEM
-                                                        object:userInfo];
+                                                        object:@{@"message" : message}];
 }
 -(void)pfFailedToGetPlaces:(NSString *)message
 {
@@ -103,7 +109,14 @@ static DataManager *sharedDataManager;
     [self notifyDelegateOfProblem:message];
 }
 
--(void)pfGotImage:(UIImage *)image for:(NSString *)placeName {
+/*
+ * Called when a new image has been downloaded
+ * It then calls to save this image to the DataStorage
+ * Then notifies all of this new image, passing it in the notification
+ * to avoid extra DataStorage manipulations
+ */
+-(void)pfGotImage:(UIImage *)image for:(NSString *)placeName
+    {
     [dataStorage saveImage:image forPlace:placeName];
     [[NSNotificationCenter defaultCenter] postNotificationName:GOT_NEW_IMAGE
                                                         object:Nil
@@ -113,6 +126,10 @@ static DataManager *sharedDataManager;
                                                                 }];
 }
 
+/*
+ * Called when no response has been received from the DataFetcher
+ * notifies the delegate that no data has been fetched due to the lengthy wait
+ */
 -(void)pfTimedOut
 {
     [self notifyDelegateOfProblem:[NSError errorWithDomain:@"com.gl.mobileloc" code:2
