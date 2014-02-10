@@ -254,7 +254,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="onTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <action selector="switchChanged:" destination="kIf-nA-PKG" eventType="valueChanged" id="kUO-KT-zz7"/>
+                                    <action selector="selectionMade:" destination="kIf-nA-PKG" eventType="valueChanged" id="qyN-hE-cg3"/>
                                 </connections>
                             </switch>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="OY7-5P-pJb" userLabel="Provider Selection">
@@ -266,7 +266,7 @@
                                 </segments>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <action selector="providerChanged:" destination="kIf-nA-PKG" eventType="valueChanged" id="LTB-Kz-k00"/>
+                                    <action selector="selectionMade:" destination="kIf-nA-PKG" eventType="valueChanged" id="lhD-HI-hmV"/>
                                 </connections>
                             </segmentedControl>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Foursquare" translatesAutoresizingMaskIntoConstraints="NO" id="zAA-rs-Guw">

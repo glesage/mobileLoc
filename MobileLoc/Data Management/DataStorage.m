@@ -2,7 +2,7 @@
 //  DataStorage.m
 //  mobileloc
 //
-//  Created by ANDREW KUCHARSKI on 2/7/14.
+//  Created by GEOFFROY LESAGE on 2/7/14.
 //  Copyright (c) 2014 GeoffroyLesage. All rights reserved.
 //
 
@@ -29,6 +29,9 @@
 
 /*
  * Data Accessors
+ *
+ * Is also responsible for checking if entities are obsolete
+ * (if the user has changed accepted sources)
  */
 -(NSArray*)getAllPlaces
 {
@@ -79,6 +82,11 @@
 
 /*
  * Data Insert & Update
+ *
+ * Is also responsible for:
+ * - delete entries which are of the wrong source
+ * - checking if entries already exist
+ * - updating entries if their "open now" attribute has changed
  */
 -(BOOL)savePlaces:(NSArray*)places
 {
@@ -119,6 +127,10 @@
     }
     return savedATLeastOne;
 }
+/*
+ * Returns a dictionary with {place_name : source }
+ * So that the savePlace() method can do checks and compare new data efficiently
+ */
 -(NSDictionary*)getNamesAndSourcesForPlaces:(NSArray*)places
 {
     NSMutableDictionary *tmpDict = [NSMutableDictionary dictionaryWithCapacity:places.count];
@@ -144,6 +156,7 @@
     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
 }
 
+// Saves a new Icon entity and assigns it to its related Place
 -(void)saveImage:(UIImage*)image forPlace:(NSString*)placeName
 {
     Icon *placeImage = [Icon MR_createEntity];

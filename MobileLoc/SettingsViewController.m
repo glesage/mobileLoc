@@ -17,16 +17,19 @@
 
 #pragma mark - View Management
 
+// Before appearing, calls to LOAD all settings to the widgets
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self loadAllSettings];
 }
 
+// Before disappearing, calls to SAVE all settings per the state of the widgets
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self saveAllSettings];
 }
 
+// When closed by user, calls to SAVE all settings per the state of the widgets
 - (IBAction)done:(id)sender
 {
     [self.delegate settingsViewControllerDidFinish:self];
@@ -36,6 +39,7 @@
 
 #pragma mark - Actions
 
+// Called when slider moved, saves value to NSUserDefaults
 - (IBAction)distanceSliderChanged:(id)sender {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setInteger:(int)distanceSlider.value forKey:@"distance"];
@@ -43,7 +47,8 @@
     [distanceLabel setText:[NSString stringWithFormat:@"%.0f m", distanceSlider.value]];
     
 }
-- (IBAction)providerChanged:(id)sender {
+// Called when user changes a setting and calls to SAVE all settings
+- (IBAction)selectionMade:(id)sender {
     [self saveAllSettings];
 }
 

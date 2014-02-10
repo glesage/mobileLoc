@@ -2,7 +2,7 @@
 //  LocationManager.m
 //  mobileloc
 //
-//  Created by ANDREW KUCHARSKI on 2/7/14.
+//  Created by GEOFFROY LESAGE on 2/7/14.
 //  Copyright (c) 2014 GeoffroyLesage. All rights reserved.
 //
 
@@ -27,6 +27,11 @@ static LocationManager *sharedLocManager;
     return sharedLocManager;
 }
 
+/*
+ * Instanciates class
+ * Instanciates the CLLocationManager object
+ * Starts updating location
+ */
 - (id)init {
     self = [super init];
     if (self) {
@@ -36,7 +41,16 @@ static LocationManager *sharedLocManager;
     return self;
 }
 
-// Fully check for location
+/*
+ * Full check for location
+ *
+ * This is called by any class who wishes to make sure user location is:
+ * - Authorized
+ * - Enabled
+ * - Available
+ *
+ * Returns TRUE if it is, FALSE if not
+ */
 -(BOOL)locationEnabled {
     BOOL locationAuthorized = ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized);
     BOOL locationEnabled = [CLLocationManager locationServicesEnabled];
@@ -44,13 +58,20 @@ static LocationManager *sharedLocManager;
     return (locationAuthorized && locationEnabled && locationAvail);
 }
 
--(CLLocation*)getCurrentLocation {
+// Returns a copy of the current location object
+-(CLLocation*)getCurrentLocation
+    {
     CLLocation *currentLocation = [[locationManager location] copy];
     return currentLocation;
 }
--(int)distanceBetweenCurrentAnd:(CLLocation*)to {
+
+    // Returns the distance between the current location and a given location
+-(int)distanceBetweenCurrentAnd:(CLLocation*)to
+    {
     return [[NSNumber numberWithDouble:[to distanceFromLocation:locationManager.location]] intValue];
 }
+    
+// Returns a user friendly formated distance text, using miles as unit
 -(NSString*)userFriendlyDistanceMiles:(int)distanceMeters
 {
     double distance = distanceMeters * METERS_TO_MILES;
