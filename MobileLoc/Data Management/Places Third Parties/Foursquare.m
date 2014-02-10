@@ -2,7 +2,7 @@
 //  Foursquare.m
 //  mobileloc
 //
-//  Created by ANDREW KUCHARSKI on 2/7/14.
+//  Created by GEOFFROY LESAGE on 2/7/14.
 //  Copyright (c) 2014 GeoffroyLesage. All rights reserved.
 //
 
@@ -49,7 +49,10 @@
                                           [self.delegate fsqGotPlaces:places];
                                       } else {
                                           [self.delegate fsqFailedToGetPlaces:[NSError errorWithDomain:@"com.gl.mobileloc" code:7
-                                                                                              userInfo:@{@"error" : @"Foursquare failed"}
+                                                                                              userInfo:@{
+                                                                                                         @"message" :@"Could not get Foursquare places",
+                                                                                                         @"error" : result
+                                                                                                         }
                                                                                ]
                                            ];
                                       }
@@ -71,7 +74,8 @@
         if (![place isKindOfClass:[NSDictionary class]]) continue;
         
         // Formatting the type string
-        NSString *type = place[@"categories"][0][@"name"];
+        NSString *type = @"na";
+        if (place[@"categories"] && [place[@"categories"] count] > 0) type = place[@"categories"][0][@"name"];
         type = [type lowercaseString];
         type = [type stringByReplacingOccurrencesOfString:@" " withString:@"_"];
         

@@ -2,7 +2,7 @@
 //  PlaceFetcher.m
 //  mobileloc
 //
-//  Created by ANDREW KUCHARSKI on 2/7/14.
+//  Created by GEOFFROY LESAGE on 2/7/14.
 //  Copyright (c) 2014 GeoffroyLesage. All rights reserved.
 //
 
@@ -36,16 +36,22 @@
 {
     [allPlaces removeAllObjects];
     
+    notifiedForPlaces = NO;
+    notifiedForImage = NO;
+    
      NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-     if (![defaults objectForKey:@"no-google"]) {
+    BOOL use_GOOGLE = [[defaults objectForKey:@"provider"] isEqualToString:@"google"];
+    BOOL use_FOURSQUARE = [[defaults objectForKey:@"provider"] isEqualToString:@"foursquare"];
+    
+     if (use_GOOGLE) {
          googlePlaces = [[GooglePlaces alloc] initWithLocation:location];
          [googlePlaces setDelegate:self];
          gotGP = FALSE;
      }
      else gotGP = TRUE; // Set to true so that we don't wait indefinitely in gotMorePlaces()
 
-    if (![defaults objectForKey:@"no-fsq"]) {
+    if (use_FOURSQUARE) {
         fsq = [[Foursquare alloc] initWithLocation:location];
         [fsq setDelegate:self];
         gotFSQ = FALSE;
@@ -65,11 +71,10 @@
  */
 -(void)reachedTimeout
 {
-    [googlePlaces cancelFetching];
-    [googlePlaceImages cancelFetching];
+    [timeOutTimer invalidate];
     
+    [googlePlaces cancelFetching];
     [fsq cancelFetching];
-    [fsqImages cancelFetching];
     
     [self.delegate pfTimedOut];
 }
@@ -88,9 +93,7 @@
     
     if (gotGP && gotFSQ) //Once all third parties have responded, proceed
     {
-        [timeOutTimer invalidate];
-        timeOutTimer = nil;
-        
+        [timeOutTimer invalidate];        
         [self.delegate pfGotAllPlaces:allPlaces];
     }
 }
@@ -104,17 +107,28 @@
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    if (![defaults objectForKey:@"no-google"]) {
-        googlePlaceImages = [[GooglePlaceImages alloc] initWithPlaces:allPlaces];
-        [googlePlaceImages setDelegate:self];
+    BOOL use_GOOGLE = [[defaults objectForKey:@"provider"] isEqualToString:@"google"];
+    BOOL use_FOURSQUARE = [[defaults objectForKey:@"provider"] isEqualToString:@"foursquare"];
+    
+    if (use_GOOGLE) {
+        [self fetchGPIForPlaces:allPlaces];
     }
     
-    if (![defaults objectForKey:@"no-fsq"]) {
-        fsqImages = [[FoursquareImages alloc] initWithPlaces:allPlaces];
-        [fsqImages setDelegate:self];
+    if (use_FOURSQUARE) {
+        [self fetchFSQIForPlaces:allPlaces];
     }
     
     [allPlaces removeAllObjects];
+}
+// Call Google Places Images for fetching
+-(void)fetchGPIForPlaces:(NSArray*)places {
+    GooglePlaceImages *googlePlaceImages = [[GooglePlaceImages alloc] initWithPlaces:places];
+    [googlePlaceImages setDelegate:self];
+}
+// Call Foursquare Images for fetching
+-(void)fetchFSQIForPlaces:(NSArray*)places {
+    FoursquareImages *fsqImages = [[FoursquareImages alloc] initWithPlaces:places];
+    [fsqImages setDelegate:self];
 }
 
 
@@ -126,7 +140,10 @@
     gotGP = YES;
     [self gotMorePlaces:places];
 }
--(void)gpFailedToGetPlaces:(NSError *)error {
+-(void)gpFailedToGetPlaces:(NSError *)error
+{
+    if (!notifiedForPlaces) [self.delegate pfFailedToGetPlaces:error.userInfo[@"message"]];
+    notifiedForPlaces = YES;
     NSLog(@"Failed to get Google places - %@", error.description);
 }
 
@@ -136,7 +153,10 @@
     gotFSQ = YES;
     [self gotMorePlaces:places];
 }
--(void)fsqFailedToGetPlaces:(NSError *)error {
+-(void)fsqFailedToGetPlaces:(NSError *)error
+{
+    if (!notifiedForPlaces) [self.delegate pfFailedToGetPlaces:error.userInfo[@"message"]];
+    notifiedForPlaces = YES;
     NSLog(@"Failed to get Foursquare places - %@", error.description);
 }
 
@@ -149,7 +169,10 @@
     if (!image) return;
     [self.delegate pfGotImage:image for:placeName];
 }
--(void)gpiFailedToGetImage:(NSError *)error {
+-(void)gpiFailedToGetImage:(NSError *)error
+{
+    if (!notifiedForImage) [self.delegate pfFailedToGetImage:error.userInfo[@"message"]];
+    notifiedForImage = YES;
     NSLog(@"Failed to get Google Place Image - %@", error.description);
 }
 
@@ -159,7 +182,10 @@
     if (!image) return;
     [self.delegate pfGotImage:image for:placeName];
 }
--(void)fsqiFailedToGetImage:(NSError *)error {
+-(void)fsqiFailedToGetImage:(NSError *)error
+{
+    if (!notifiedForImage) [self.delegate pfFailedToGetImage:error.userInfo[@"message"]];
+    notifiedForImage = YES;
     NSLog(@"Failed to get Foursquare Image - %@", error.description);
 }
 

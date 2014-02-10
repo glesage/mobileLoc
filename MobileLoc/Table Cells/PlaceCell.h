@@ -2,7 +2,7 @@
 //  PlaceCell.h
 //  mobileloc
 //
-//  Created by ANDREW KUCHARSKI on 2/8/14.
+//  Created by GEOFFROY LESAGE on 2/8/14.
 //  Copyright (c) 2014 GeoffroyLesage. All rights reserved.
 //
 
@@ -18,8 +18,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *openLabel;
-
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *imageLoad;
 
 -(void)observeImageUpdates;
 -(void)setMainIcon:(UIImage*)image;

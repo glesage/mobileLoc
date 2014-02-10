@@ -2,7 +2,7 @@
 //  MapViewController.m
 //  mobileloc
 //
-//  Created by ANDREW KUCHARSKI on 2/8/14.
+//  Created by GEOFFROY LESAGE on 2/8/14.
 //  Copyright (c) 2014 GeoffroyLesage. All rights reserved.
 //
 
@@ -24,7 +24,11 @@
 
 @synthesize places;
 
-
+/*
+ * Upon view appearance
+ * set the map to the user location
+ * and plot all places on the map
+ */
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -55,7 +59,10 @@
 -(void)clearMap {
     [_mapView removeAnnotations:_mapView.annotations];
 }
--(void)plotPlaces {
+    
+// Plots all the 'places' on the map using MyLocation custom MKAnnotation
+-(void)plotPlaces
+{
     for (NSDictionary *place in places) {
         
         NSString *placeName = [place objectForKey:@"name"];
@@ -87,6 +94,7 @@
     }
     return nil;
 }
+// Required controller method
 -(void)mapViewControllerDidFinish:(MapViewController *)controller {
     NSLog(@"Finished");
 }

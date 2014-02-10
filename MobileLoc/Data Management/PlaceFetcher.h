@@ -2,7 +2,7 @@
 //  PlaceFetcher.h
 //  mobileloc
 //
-//  Created by ANDREW KUCHARSKI on 2/7/14.
+//  Created by GEOFFROY LESAGE on 2/7/14.
 //  Copyright (c) 2014 GeoffroyLesage. All rights reserved.
 //
 
@@ -16,8 +16,9 @@
 
 @protocol PlaceFetcherDelegate
 - (void)pfGotAllPlaces:(NSArray*)places;
-- (void)pfFailedToGetPlaces:(NSError*)error;
+- (void)pfFailedToGetPlaces:(NSString*)message;
 - (void)pfGotImage:(UIImage*)image for:(NSString*)placeName;
+- (void)pfFailedToGetImage:(NSString*)message;
 - (void)pfTimedOut;
 
 @end
@@ -25,12 +26,13 @@
 @interface PlaceFetcher : NSObject <GooglePlacesDelegate, GooglePlaceImagesDelegate, FoursquareDelegate, FoursquareImagesDelegate>
 {
     GooglePlaces *googlePlaces;
-    GooglePlaceImages *googlePlaceImages;
     BOOL gotGP;
     
     Foursquare *fsq;
-    FoursquareImages *fsqImages;
     BOOL gotFSQ;
+    
+    BOOL notifiedForImage;
+    BOOL notifiedForPlaces;
     
     NSTimer *timeOutTimer;
     

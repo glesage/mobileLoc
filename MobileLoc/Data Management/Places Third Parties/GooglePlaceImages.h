@@ -2,7 +2,7 @@
 //  GooglePlaceImages.h
 //  mobileloc
 //
-//  Created by ANDREW KUCHARSKI on 2/8/14.
+//  Created by GEOFFROY LESAGE on 2/8/14.
 //  Copyright (c) 2014 GeoffroyLesage. All rights reserved.
 //
 
@@ -21,6 +21,5 @@
 @property (weak, nonatomic) id <GooglePlaceImagesDelegate> delegate;
 
 -(id)initWithPlaces:(NSArray*)places;
--(void)cancelFetching;
 
 @end

@@ -2,7 +2,7 @@
 //  Foursquare.h
 //  mobileloc
 //
-//  Created by ANDREW KUCHARSKI on 2/7/14.
+//  Created by GEOFFROY LESAGE on 2/7/14.
 //  Copyright (c) 2014 GeoffroyLesage. All rights reserved.
 //
 
@@ -22,6 +22,5 @@
 @property (weak, nonatomic) id <FoursquareImagesDelegate> delegate;
 
 -(id)initWithPlaces:(NSArray*)places;
--(void)cancelFetching;
 
 @end

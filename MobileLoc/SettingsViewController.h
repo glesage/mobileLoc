@@ -21,15 +21,13 @@
     IBOutlet UILabel *distanceLabel;
     
     IBOutlet UISwitch *openSwitch;
-    IBOutlet UISwitch *googleSwitch;
-    IBOutlet UISwitch *foursquareSwitch;
-    IBOutlet UISwitch *yelpSwitch;
+    IBOutlet UISegmentedControl *providerSC;
 }
 
 @property (weak, nonatomic) id <SettingsViewControllerDelegate> delegate;
 
 - (IBAction)distanceSliderChanged:(id)sender;
-- (IBAction)switchChanged:(UISwitch*)sender;
+- (IBAction)selectionMade:(id)sender;
 - (IBAction)done:(id)sender;
 
 @end

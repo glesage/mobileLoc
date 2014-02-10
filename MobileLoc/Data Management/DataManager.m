@@ -25,6 +25,12 @@ static DataManager *sharedDataManager;
     return sharedDataManager;
 }
 
+/*
+ * Instanciate class
+ * Instanciate main containers
+ * Reset the repeat counter
+ * check to fetch new places
+ */
 - (id)init {
     self = [super init];
     if (self) {
@@ -32,14 +38,44 @@ static DataManager *sharedDataManager;
         
         placeFetcher = [[PlaceFetcher alloc] init];
         [placeFetcher setDelegate:self];
-
-        [placeFetcher fetchPlacesAround:[[LocationManager sharedManager] getCurrentLocation]];
+        
+        repeatCounter = 0;
+        [self fetchNearPlaces];
     }
     return self;
 }
 
+/*
+ * Attempt to launch place fetching
+ *
+ * Checks for location services before for TIMEOUT_REPEATS number of times
+ * If location is not enabled after this timer then STOP
+ */
+-(void)fetchNearPlaces {
+    if (repeatCounter > TIMEOUT_REPEATS) {
+        [self notifyDelegateOfProblem:@"Location services are disabled or invalid"];
+        repeatCounter = 0;
+        return;
+    }
+    if (![[LocationManager sharedManager] locationEnabled]) {
+        repeatCounter++;
+        [self performSelector:@selector(fetchNearPlaces) withObject:nil afterDelay:1];
+        return;
+    }
+    [placeFetcher fetchPlacesAround:[[LocationManager sharedManager] getCurrentLocation]];
+}
+
+/*
+ * Asks the dataStorage for all the places
+ * If none are found, then fetch some and return an empty array
+ */
 -(NSArray*)getAllPlaces {
-    return [dataStorage getAllPlaces];
+    NSArray *allThePlaces = [dataStorage getAllPlaces];
+    
+    if (allThePlaces.count > 0) return allThePlaces;
+    else [self fetchNearPlaces];
+    
+    return [NSArray array];
 }
 
 
@@ -47,21 +83,40 @@ static DataManager *sharedDataManager;
 
 -(void)pfGotAllPlaces:(NSArray *)places
 {
-    if (![dataStorage savePlaces:places]) return; // If no new places have been saved, no need to change the UI!
+    // If no new places have been saved, no need to change anything,
+    // and especially no need to fetch new images!
+    if (![dataStorage savePlaces:places]) return;
     
     // Otherwise, inform the world that we've got news
-    [[NSNotificationCenter defaultCenter] postNotificationName:GOT_NEW_PLACES
-                                                        object:nil];
-    // Then proceed to fetch images
-    [placeFetcher fetchImagesForAllPlaces];
+    [[NSNotificationCenter defaultCenter] postNotificationName:GOT_NEW_PLACES object:nil];
+    
+    // Then proceed to fetch images (after a short delay to let the UI rest)
+    [placeFetcher performSelector:@selector(fetchImagesForAllPlaces) withObject:nil afterDelay:0.1];
 }
 
--(void)pfFailedToGetPlaces:(NSError *)error {
-    [[NSNotificationCenter defaultCenter] postNotificationName:UNABLE_TO_FETCH_PLACES
-                                                        object:@{ @"error" : error.description }];
+// Sends a Notification to all with the related error/problem message
+-(void)notifyDelegateOfProblem:(NSString*)message
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:DMGR_PROBLEM
+                                                        object:@{@"message" : message}];
+}
+-(void)pfFailedToGetPlaces:(NSString *)message
+{
+    [self notifyDelegateOfProblem:message];
+}
+-(void)pfFailedToGetImage:(NSString *)message
+{
+    [self notifyDelegateOfProblem:message];
 }
 
--(void)pfGotImage:(UIImage *)image for:(NSString *)placeName {
+/*
+ * Called when a new image has been downloaded
+ * It then calls to save this image to the DataStorage
+ * Then notifies all of this new image, passing it in the notification
+ * to avoid extra DataStorage manipulations
+ */
+-(void)pfGotImage:(UIImage *)image for:(NSString *)placeName
+    {
     [dataStorage saveImage:image forPlace:placeName];
     [[NSNotificationCenter defaultCenter] postNotificationName:GOT_NEW_IMAGE
                                                         object:Nil
@@ -71,9 +126,18 @@ static DataManager *sharedDataManager;
                                                                 }];
 }
 
--(void)pfTimedOut {
-    [[NSNotificationCenter defaultCenter] postNotificationName:UNABLE_TO_FETCH_PLACES
-                                                        object:@{ @"message" : @"Took too long to fetch places :(" }];
+/*
+ * Called when no response has been received from the DataFetcher
+ * notifies the delegate that no data has been fetched due to the lengthy wait
+ */
+-(void)pfTimedOut
+{
+    [self notifyDelegateOfProblem:[NSError errorWithDomain:@"com.gl.mobileloc" code:2
+                                                  userInfo:@{
+                                                             @"message" : @"Took too long to fetch places :("
+                                                             }
+                                   ]
+     ];
 }
 
 @end

@@ -2,7 +2,7 @@
 //  PlaceCell.m
 //  mobileloc
 //
-//  Created by ANDREW KUCHARSKI on 2/8/14.
+//  Created by GEOFFROY LESAGE on 2/8/14.
 //  Copyright (c) 2014 GeoffroyLesage. All rights reserved.
 //
 
@@ -15,13 +15,9 @@
 
 @synthesize nameLabel;
 @synthesize icon;
-@synthesize imageLoad;
+    
 
-
--(void)observeImageUpdates {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotNewImage:) name:GOT_NEW_IMAGE object:nil];
-}
-
+// Sets the openLabel to the correct text and color based on given status
 -(void)setOpen:(BOOL)open {
     if (open) {
         [self.openLabel setText:@"OPEN"];
@@ -34,14 +30,30 @@
 
 }
 
--(void)setMainIcon:(UIImage*)image {
+    
+#pragma mark - Icon image business
+    
+// This makes sure the cells watches for any notifications containing their (icon) image
+-(void)observeImageUpdates
+    {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotNewImage:) name:GOT_NEW_IMAGE object:nil];
+    }
+
+// Rounds the corners of a given image and sets the icon image to it
+-(void)setMainIcon:(UIImage*)image
+{
     icon.layer.cornerRadius = 10.0;
     icon.clipsToBounds = YES;
     
     [icon setImage:image];
-    [imageLoad stopAnimating];
 }
--(void)gotNewImage:(NSNotification*)notification {
+/*
+ * Responds to the reception of a new image
+ * checks the image corresponds to the current place
+ * and checks to verify the image is there
+ */
+-(void)gotNewImage:(NSNotification*)notification
+{    
     if (![notification.userInfo objectForKey:@"image"]) return;
     if (![notification.userInfo objectForKey:@"placeName"]) return;
     
@@ -53,6 +65,9 @@
     [self setMainIcon:placeImage];
 }
 
+    
+#pragma  mark - Standard cell mgmt
+    
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
